@@ -13,6 +13,10 @@ function Hello () {
   return (<div>Hello</div>);
 }
 
+function Join () {
+  return (<div>Players can join</div>);
+}
+
 function App () {
   return (
     <>
@@ -21,6 +25,7 @@ function App () {
           <Route path="/" element={<Hello/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/signup" element={<Signup/>} />
+          <Route path="/join" element={<Join/>} />
         </Routes>
       </BrowserRouter>
     </>
