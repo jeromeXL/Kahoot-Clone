@@ -5,8 +5,10 @@ import {
   Route
 } from 'react-router-dom';
 
-import Login from './components/Login.js';
-import Signup from './components/Signup.js';
+import Login from './components/Auth/Login.js';
+import Signup from './components/Auth/Signup.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
+// import Join from './components/PlayerJoin/Join.js';
 
 function Hello () {
   return (<div>Hello</div>);
@@ -15,12 +17,12 @@ function Hello () {
 function App () {
   return (
     <>
-      <>Let&apos;s go!</>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Hello/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/signup" element={<Signup/>} />
+          {/* <Route path="/join" element={<Join/>} /> */}
         </Routes>
       </BrowserRouter>
     </>
