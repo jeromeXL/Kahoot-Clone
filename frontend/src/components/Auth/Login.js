@@ -4,11 +4,10 @@ import Form from 'react-bootstrap/Form';
 import AuthContainer from './AuthContainer';
 import Centre from './Centre';
 import AuthTextInput from './AuthTextInput';
-import LinkToSignUp from './LinkToSignUp';
 import Title from './Title';
 import data from '../../config.json';
-import LinkToPlayerJoin from './LinkToPlayerJoin';
 import AdminTitle from './AdminTitle';
+import LinkToPage from './LinkToPage';
 
 const BACKEND_PORT = data.BACKEND_PORT;
 const url = `http://localhost:${BACKEND_PORT}`;
@@ -63,8 +62,8 @@ export default function Login () {
               </AuthSubmitButton>
             </Form>
           </AuthContainer>
-          <LinkToSignUp/>
-          <LinkToPlayerJoin/>
+          <LinkToPage text="Don't have an account? " page="../signup" linkText="Sign up!"/>
+          <LinkToPage text="Want to join as a player? " page="../join" linkText="Click here!"/>
         </Centre>
       </>
   );
