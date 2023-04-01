@@ -3,7 +3,7 @@ import SubmitButton from '../General/SubmitButton';
 import Form from 'react-bootstrap/Form';
 import FormContainer from '../General/FormContainer';
 import Centre from '../General/Centre';
-import FloatingTextInput from '../General/FloatingTextInput';
+import FloatingInput from '../General/FloatingInput';
 import Title from '../General/Title';
 import data from '../../config.json';
 import Subtitle from '../General/Subtitle';
@@ -55,8 +55,8 @@ export default function Login () {
           <Subtitle> Admin Login </Subtitle>
           <FormContainer color="#AAB8D4">
             <Form>
-              <FloatingTextInput controlId="formBasicEmail" labelControlId="floatingInput" label="Email Address" placeholder="Enter email" onChange={emailChange}/>
-              <FloatingTextInput controlId="formBasicPassword" labelControlId="floatingPassword" label="Password" placeholder="Enter password" onChange={passwordChange}/>
+              <FloatingInput type="text" controlId="formBasicEmail" labelControlId="floatingInput" label="Email Address" placeholder="Enter email" onChange={emailChange}/>
+              <FloatingInput type="password" controlId="formBasicPassword" labelControlId="floatingPassword" label="Password" placeholder="Enter password" onChange={passwordChange}/>
               <SubmitButton onClick={LoginPress} color="#6178A8">
                 Log In
               </SubmitButton>
