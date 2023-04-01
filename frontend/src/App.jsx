@@ -5,8 +5,9 @@ import {
   Route
 } from 'react-router-dom';
 
-import Login from './components/Login.js';
-import Signup from './components/Signup.js';
+import Login from './components/Auth/Login.js';
+import Signup from './components/Auth/Signup.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Hello () {
   return (<div>Hello</div>);
@@ -15,7 +16,6 @@ function Hello () {
 function App () {
   return (
     <>
-      <>Let&apos;s go!</>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Hello/>} />
