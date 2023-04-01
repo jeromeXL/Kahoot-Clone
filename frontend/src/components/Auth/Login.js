@@ -1,13 +1,13 @@
 import { React, useState } from 'react';
-import AuthSubmitButton from './AuthSubmitButton';
+import SubmitButton from '../General/SubmitButton';
 import Form from 'react-bootstrap/Form';
-import AuthContainer from './AuthContainer';
-import Centre from './Centre';
-import AuthTextInput from './AuthTextInput';
-import Title from './Title';
+import FormContainer from '../General/FormContainer';
+import Centre from '../General/Centre';
+import FloatingTextInput from '../General/FloatingTextInput';
+import Title from '../General/Title';
 import data from '../../config.json';
-import AdminTitle from './AdminTitle';
-import LinkToPage from './LinkToPage';
+import Subtitle from '../General/Subtitle';
+import LinkToPage from '../General/LinkToPage';
 
 const BACKEND_PORT = data.BACKEND_PORT;
 const url = `http://localhost:${BACKEND_PORT}`;
@@ -50,18 +50,18 @@ export default function Login () {
 
   return (
       <>
-        <Centre>
+        <Centre color="#39548D">
           <Title/>
-          <AdminTitle> Admin Login </AdminTitle>
-          <AuthContainer>
+          <Subtitle> Admin Login </Subtitle>
+          <FormContainer color="#AAB8D4">
             <Form>
-              <AuthTextInput controlId="formBasicEmail" labelControlId="floatingInput" label="Email Address" placeholder="Enter email" onChange={emailChange}/>
-              <AuthTextInput controlId="formBasicPassword" labelControlId="floatingPassword" label="Password" placeholder="Enter password" onChange={passwordChange}/>
-              <AuthSubmitButton onClick={LoginPress}>
+              <FloatingTextInput controlId="formBasicEmail" labelControlId="floatingInput" label="Email Address" placeholder="Enter email" onChange={emailChange}/>
+              <FloatingTextInput controlId="formBasicPassword" labelControlId="floatingPassword" label="Password" placeholder="Enter password" onChange={passwordChange}/>
+              <SubmitButton onClick={LoginPress} color="#6178A8">
                 Log In
-              </AuthSubmitButton>
+              </SubmitButton>
             </Form>
-          </AuthContainer>
+          </FormContainer>
           <LinkToPage text="Don't have an account? " page="../signup" linkText="Sign up!"/>
           <LinkToPage text="Want to join as a player? " page="../join" linkText="Click here!"/>
         </Centre>

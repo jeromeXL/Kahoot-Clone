@@ -8,13 +8,10 @@ import {
 import Login from './components/Auth/Login.js';
 import Signup from './components/Auth/Signup.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Join from './components/PlayerJoin/Join.js';
 
 function Hello () {
   return (<div>Hello</div>);
-}
-
-function Join () {
-  return (<div>Players can join</div>);
 }
 
 function App () {

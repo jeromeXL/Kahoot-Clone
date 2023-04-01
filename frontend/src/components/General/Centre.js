@@ -7,6 +7,6 @@ export default function Centre (props) {
     justifyContent: 'flex-start',
     height: '100vh',
     flexDirection: 'column',
-    backgroundColor: '#39548D'
+    backgroundColor: props.color
   }}> {props.children} </div>)
 }
