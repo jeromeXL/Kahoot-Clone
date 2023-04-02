@@ -11,7 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // import Join from './components/PlayerJoin/Join.js';
 
 function Hello () {
-  return (<div>Hello</div>);
+  return (<div>Hello, Welcome to the Home Page</div>);
 }
 
 function App () {
