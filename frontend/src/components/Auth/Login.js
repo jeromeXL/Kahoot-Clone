@@ -17,16 +17,14 @@ export default function Login () {
   const [email, setEmail] = useState('');
   const emailChange = (event) => {
     setEmail(event.target.value);
-    console.log(`${email} : ${event.target.value}`);
   }
 
   const [password, setPassword] = useState('');
   const passwordChange = (event) => {
     setPassword(event.target.value);
-    console.log(`${password} : ${event.target.value}`);
   }
 
-  function LoginPress () {
+  const LoginPress = () => {
     console.log('Logged in');
     console.log(`Email: ${email}. Password: ${password}`);
     // Fetch request
@@ -57,13 +55,13 @@ export default function Login () {
             <Form>
               <FloatingInput type="text" controlId="formBasicEmail" labelControlId="floatingInput" label="Email Address" placeholder="Enter email" onChange={emailChange}/>
               <FloatingInput type="password" controlId="formBasicPassword" labelControlId="floatingPassword" label="Password" placeholder="Enter password" onChange={passwordChange}/>
-              <SubmitButton onClick={LoginPress} color="#6178A8">
+              <SubmitButton onClick={LoginPress} color="#475A81">
                 Log In
               </SubmitButton>
             </Form>
           </FormContainer>
-          <LinkToPage text="Don't have an account? " page="../signup" linkText="Sign up!"/>
-          <LinkToPage text="Want to join as a player? " page="../join" linkText="Click here!"/>
+          <LinkToPage text="Don't have an account? " page="../signup" linkText="Sign up!" color='white'/>
+          <LinkToPage text="Want to join a game as a player? " page="../join" linkText="Click here!" color='white'/>
         </Centre>
       </>
   );

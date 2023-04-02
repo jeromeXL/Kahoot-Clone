@@ -9,17 +9,14 @@ import Login from './components/Auth/Login.js';
 import Signup from './components/Auth/Signup.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Join from './components/PlayerJoin/Join.js';
-
-function Hello () {
-  return (<div>Hello</div>);
-}
+import Default from './components/DefaultScreen/Default.js';
 
 function App () {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Hello/>} />
+          <Route path="/" element={<Default/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/signup" element={<Signup/>} />
           <Route path="/join" element={<Join/>} />
