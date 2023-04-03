@@ -12,6 +12,7 @@ import Join from './components/PlayerJoin/Join.js';
 import Default from './components/DefaultScreen/Default.js';
 
 function App () {
+  console.log("Let's go!")
   return (
     <>
       <BrowserRouter>
