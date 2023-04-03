@@ -10,6 +10,7 @@ import Signup from './components/Auth/Signup.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Join from './components/PlayerJoin/Join.js';
 import Default from './components/DefaultScreen/Default.js';
+import Dashboard from './components/Dashboard/Dashboard.js';
 
 function App () {
   return (
@@ -20,6 +21,7 @@ function App () {
           <Route path="/login" element={<Login/>} />
           <Route path="/signup" element={<Signup/>} />
           <Route path="/join" element={<Join/>} />
+          <Route path="/dashboard" element={<Dashboard/>} />
         </Routes>
       </BrowserRouter>
     </>
