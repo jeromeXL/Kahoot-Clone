@@ -64,7 +64,11 @@ export default function Signup () {
       // If authorized, change to dashboard page. Somehow use token
       token = data.token;
       if (data.token) {
-        navigate('/dashboard');
+        navigate('/dashboard', {
+          state: {
+            token: data.token,
+          }
+        });
       }
     }).catch((err) => {
       console.log(`ERROR: ${err}`);

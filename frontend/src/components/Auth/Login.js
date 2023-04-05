@@ -45,7 +45,11 @@ export default function Login () {
       token = data.token;
       if (data.token) {
         console.log('token is valid');
-        navigate('/dashboard');
+        navigate('/dashboard', {
+          state: {
+            token: data.token,
+          }
+        });
       }
     }).catch((err) => {
       console.log(`ERROR: ${err}`);
