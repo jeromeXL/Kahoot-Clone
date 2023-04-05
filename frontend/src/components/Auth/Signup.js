@@ -8,12 +8,14 @@ import Title from '../General/Title';
 import data from '../../config.json';
 import Subtitle from '../General/Subtitle';
 import LinkToPage from '../General/LinkToPage';
+import { useNavigate } from 'react-router-dom';
 
 const BACKEND_PORT = data.BACKEND_PORT;
 const url = `http://localhost:${BACKEND_PORT}`;
 let token;
 
 export default function Signup () {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const emailChange = (event) => {
     setEmail(event.target.value);
@@ -38,7 +40,7 @@ export default function Signup () {
     console.log(`${confirmPassword} : ${event.target.value}`);
   }
 
-  function SignUpPress () {
+  const SignUpPress = async () => {
     console.log('Signed Up');
     console.log(`Email: ${email}. Name: ${name} Password: ${password}`);
 
@@ -61,6 +63,13 @@ export default function Signup () {
       console.log('Sign Up data ', data);
       // If authorized, change to dashboard page. Somehow use token
       token = data.token;
+      if (data.token) {
+        navigate('/dashboard', {
+          state: {
+            token: data.token,
+          }
+        });
+      }
     }).catch((err) => {
       console.log(`ERROR: ${err}`);
     });
