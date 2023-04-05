@@ -8,12 +8,14 @@ import Title from '../General/Title';
 import data from '../../config.json';
 import Subtitle from '../General/Subtitle';
 import LinkToPage from '../General/LinkToPage';
+import { useNavigate } from 'react-router-dom';
 
 const BACKEND_PORT = data.BACKEND_PORT;
 const url = `http://localhost:${BACKEND_PORT}`;
 let token;
 
 export default function Login () {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const emailChange = (event) => {
     setEmail(event.target.value);
@@ -24,7 +26,7 @@ export default function Login () {
     setPassword(event.target.value);
   }
 
-  const LoginPress = () => {
+  const LoginPress = async () => {
     console.log('Logged in');
     console.log(`Email: ${email}. Password: ${password}`);
     // Fetch request
@@ -41,6 +43,14 @@ export default function Login () {
       console.log('Log in data ', data);
       // If authorized, change to dashboard page. Somehow use token
       token = data.token;
+      if (data.token) {
+        console.log('token is valid');
+        navigate('/dashboard', {
+          state: {
+            token: data.token,
+          }
+        });
+      }
     }).catch((err) => {
       console.log(`ERROR: ${err}`);
     });

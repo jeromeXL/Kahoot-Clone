@@ -13,6 +13,7 @@ import Default from './components/DefaultScreen/Default.js';
 import Dashboard from './components/Dashboard/Dashboard.js';
 
 function App () {
+  console.log("Let's go!")
   return (
     <>
       <BrowserRouter>
