@@ -35,7 +35,7 @@ export default function Dashboard () {
 
   return (
     <>
-      <DashboardHeader/>
+      <DashboardHeader token={token}/>
       <GamesContainer>
         <GameInDashBoard/>
         <GameInDashBoard/>

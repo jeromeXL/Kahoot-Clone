@@ -3,12 +3,12 @@ import CreateNewGameButton from './CreateNewGameButton';
 import DashboardTitle from './DashboardTitle';
 import LogOutButton from './LogOutButton';
 
-export default function DashboardHeader () {
+export default function DashboardHeader (props) {
   return (
     <div className='d-flex justify-content-around align-items-center' style={{ backgroundColor: '#39548D' }}>
-        <CreateNewGameButton/>
+        <CreateNewGameButton token={props.token}/>
         <DashboardTitle/>
-        <LogOutButton/>
+        <LogOutButton token={props.token}/>
     </div>
   );
 }
