@@ -2,7 +2,7 @@ import { React, useState, useEffect } from 'react';
 import DashboardHeader from './DashboardHeader';
 import '@fontsource/inter';
 import GamesContainer from './GamesContainer';
-// import GameInDashBoard from './GameInDashboard';
+import GameInDashBoard from './GameInDashboard';
 import { useLocation } from 'react-router-dom';
 import data from '../../config.json';
 
@@ -42,15 +42,23 @@ export default function Dashboard () {
       <DashboardHeader token={token} update={fetchAllQuizzes}/>
       <GamesContainer>
         {/* <GameInDashBoard/>
+        <GameInDashBoard/>
+        <GameInDashBoard/>
         <GameInDashBoard/> */}
         <ul>
         {quizzes.map((quiz, index) => (
           <li key={index}>
             {quiz.name}
             <br/>
+            {quiz.id}
+            <br/>
           </li>
         ))}
         </ul>
+        <br/>
+        {quizzes.map((quiz, index) => (
+          <GameInDashBoard key={index} token={token} quiz={quiz}/>
+        ))}
       </GamesContainer>
     </>
   );
