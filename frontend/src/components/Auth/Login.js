@@ -1,4 +1,5 @@
 import { React, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SubmitButton from '../General/SubmitButton';
 import Form from 'react-bootstrap/Form';
 import FormContainer from '../General/FormContainer';
@@ -14,6 +15,7 @@ const url = `http://localhost:${BACKEND_PORT}`;
 let token;
 
 export default function Login () {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const emailChange = (event) => {
     setEmail(event.target.value);
@@ -24,7 +26,7 @@ export default function Login () {
     setPassword(event.target.value);
   }
 
-  const LoginPress = () => {
+  const LoginPress = async () => {
     console.log('Logged in');
     console.log(`Email: ${email}. Password: ${password}`);
     // Fetch request
@@ -41,6 +43,9 @@ export default function Login () {
       console.log('Log in data ', data);
       // If authorized, change to dashboard page. Somehow use token
       token = data.token;
+      if (data.token) {
+        navigate('/dashboard');
+      }
     }).catch((err) => {
       console.log(`ERROR: ${err}`);
     });

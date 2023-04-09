@@ -1,4 +1,6 @@
 import { React, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import SubmitButton from '../General/SubmitButton';
 import Form from 'react-bootstrap/Form';
 import FormContainer from '../General/FormContainer';
@@ -14,12 +16,12 @@ const url = `http://localhost:${BACKEND_PORT}`;
 let token;
 
 export default function Signup () {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const emailChange = (event) => {
     setEmail(event.target.value);
     console.log(`${email} : ${event.target.value}`);
   }
-
   const [name, setName] = useState('');
   const nameChange = (event) => {
     setName(event.target.value);
@@ -38,7 +40,7 @@ export default function Signup () {
     console.log(`${confirmPassword} : ${event.target.value}`);
   }
 
-  function SignUpPress () {
+  const SignUpPress = async () => {
     console.log('Signed Up');
     console.log(`Email: ${email}. Name: ${name} Password: ${password}`);
 
@@ -61,6 +63,9 @@ export default function Signup () {
       console.log('Sign Up data ', data);
       // If authorized, change to dashboard page. Somehow use token
       token = data.token;
+      if (data.token) {
+        navigate('/dashboard');
+      }
     }).catch((err) => {
       console.log(`ERROR: ${err}`);
     });
@@ -73,8 +78,8 @@ export default function Signup () {
         <Subtitle> Sign Up </Subtitle>
         <FormContainer color="#AAB8D4">
           <Form>
-            <FloatingInput type="text" controlId="formBasicEmail" labelControlId="floatingInput" label="Email Address" placeholder="Enter email" onChange={emailChange}/>
-            <FloatingInput type="text" controlId="formBasicName" labelControlId="floatingInput" label="Name" placeholder="Enter name" onChange={nameChange}/>
+            <FloatingInput type="text" controlId="formBasicEmail" labelControlId="floatingEmail" label="Email Address" placeholder="Enter email" onChange={emailChange}/>
+            <FloatingInput type="text" controlId="formBasicName" labelControlId="floatingName" label="Name" placeholder="Enter name" onChange={nameChange}/>
             <FloatingInput type="password" controlId="formBasicPassword" labelControlId="floatingPassword" label="Password" placeholder="Enter password" onChange={passwordChange}/>
             <FloatingInput type="password" controlId="formBasicConfirmPassword" labelControlId="floatingConfirmPassword" label="Confirm password" placeholder="Confirm password" onChange={passwordConfirmChange}/>
             <SubmitButton onClick={SignUpPress} color="#6178A8">
