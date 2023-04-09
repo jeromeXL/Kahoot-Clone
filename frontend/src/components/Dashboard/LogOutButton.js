@@ -1,37 +1,38 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
-import data from '../../config.json';
+import HeaderButton from '../General/HeaderButton';
+import { useNavigate } from 'react-router-dom';
 
+import data from '../../config.json';
 const BACKEND_PORT = data.BACKEND_PORT;
 const url = `http://localhost:${BACKEND_PORT}`;
 
 export default function LogOutButton (props) {
-  const token = props.token;
+  const navigate = useNavigate();
+  const token = props.token
   const logOut = () => {
     console.log('Log out. Link to login page');
     // Fetch request
     fetch(url + '/admin/auth/logout', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token })
+      headers: { Authorization: `Bearer ${token}` },
     }).then((response) => {
       if (!response.ok) {
         console.log('response error!!!!');
       }
       return response.json();
     }).then((data) => {
-      console.log('Log in data ', data);
-      // If authorized, change to dashboard page. Somehow use token
-      if (!data.error) {
-        // navigate('/login');
+      if (data.error) {
+        console.log(`ERROR: ${data.error}`);
+      } else {
+        navigate('../login');
       }
     }).catch((err) => {
       console.log(`ERROR: ${err}`);
     });
   }
   return (
-    <Button type='button' style={{ backgroundColor: '#D9D9D9', borderColor: '#D9D9D9', color: 'black' }} onClick={logOut}>
+    <HeaderButton onClick={logOut}>
       Log out
-    </Button>
+    </HeaderButton>
   );
 }

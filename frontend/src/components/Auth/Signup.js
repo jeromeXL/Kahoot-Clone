@@ -10,6 +10,7 @@ import Title from '../General/Title';
 import data from '../../config.json';
 import Subtitle from '../General/Subtitle';
 import LinkToPage from '../General/LinkToPage';
+import { useNavigate } from 'react-router-dom';
 
 const BACKEND_PORT = data.BACKEND_PORT;
 const url = `http://localhost:${BACKEND_PORT}`;
@@ -64,7 +65,11 @@ export default function Signup () {
       // If authorized, change to dashboard page. Somehow use token
       token = data.token;
       if (data.token) {
-        navigate('/dashboard');
+        navigate('/dashboard', {
+          state: {
+            token: data.token,
+          }
+        });
       }
     }).catch((err) => {
       console.log(`ERROR: ${err}`);
