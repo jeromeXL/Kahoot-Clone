@@ -12,6 +12,7 @@ import Join from './components/PlayerJoin/Join.js';
 import Default from './components/DefaultScreen/Default.js';
 import Dashboard from './components/Dashboard/Dashboard.js';
 import EditGame from './components/EditGame/EditGame.js';
+import Review from './components/Review/Review.js';
 
 function App () {
   console.log("Let's go!")
@@ -25,6 +26,7 @@ function App () {
           <Route path="/join" element={<Join/>} />
           <Route path="/dashboard" element={<Dashboard/>} />
           <Route path="/edit/game/:id" element={<EditGame/>} />
+          <Route path="/review" element={<Review/>} />
         </Routes>
       </BrowserRouter>
     </>
