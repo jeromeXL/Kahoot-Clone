@@ -17,7 +17,7 @@ export default function Default () {
           </Subtitle>
           <LinkToPage text="" page="./join" linkText="Click here to be a Player" color="white" fontSize='15pt'/>
         </FormContainer>
-        <LinkToPage text="Enjoy using BigBrain? Give us a review" page="./review" linkText="here!" color="white" fontSize="10pt"/>
+        <LinkToPage text="Enjoy using BigBrain? Give us a review " page="../review" linkText="here!" color='white'/>
       </Centre>
     </>
   );
