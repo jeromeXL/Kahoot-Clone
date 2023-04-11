@@ -5,9 +5,10 @@ import {
   Route
 } from 'react-router-dom';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import Login from './components/Auth/Login.js';
 import Signup from './components/Auth/Signup.js';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Join from './components/PlayerJoin/Join.js';
 import Default from './components/DefaultScreen/Default.js';
 import Dashboard from './components/Dashboard/Dashboard.js';

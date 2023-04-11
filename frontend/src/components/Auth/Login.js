@@ -9,6 +9,7 @@ import Title from '../General/Title';
 import data from '../../config.json';
 import Subtitle from '../General/Subtitle';
 import LinkToPage from '../General/LinkToPage';
+import ErrorPopup from '../General/ErrorPopup';
 
 const BACKEND_PORT = data.BACKEND_PORT;
 const url = `http://localhost:${BACKEND_PORT}`;
@@ -16,6 +17,7 @@ let token;
 
 export default function Login () {
   const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const emailChange = (event) => {
     setEmail(event.target.value);
@@ -26,9 +28,29 @@ export default function Login () {
     setPassword(event.target.value);
   }
 
+  const [loginError, setLoginError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
   const LoginPress = async () => {
-    console.log('Logged in');
+    console.log('Login Button Pressed');
     console.log(`Email: ${email}. Password: ${password}`);
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setLoginError(false);
+
+    if (email === '') {
+      setLoginError(true);
+      setErrorMessage('Email cannot be empty')
+      throw new Error('Email cannot be empty');
+    } else if (!regex.test(email)) {
+      setLoginError(true);
+      setErrorMessage('Please use email format');
+      throw new Error('Please use email format');
+    } else if (password === '') {
+      setLoginError(true);
+      setErrorMessage('Password cannot be empty');
+      throw new Error('Password cannot be empty');
+    }
+
     // Fetch request
     fetch(url + '/admin/auth/login', {
       method: 'POST',
@@ -37,6 +59,8 @@ export default function Login () {
     }).then((response) => {
       if (!response.ok) {
         console.log('response error!!!!');
+        setLoginError(true);
+        setErrorMessage(response.error);
       }
       return response.json();
     }).then((data) => {
@@ -61,6 +85,7 @@ export default function Login () {
         <Centre color="#39548D">
           <Title/>
           <Subtitle> Admin Login </Subtitle>
+          {loginError && <ErrorPopup message={errorMessage} />}
           <FormContainer color="#AAB8D4">
             <Form>
               <FloatingInput type="text" controlId="formBasicEmail" labelControlId="floatingInput" label="Email Address" placeholder="Enter email" onChange={emailChange}/>
