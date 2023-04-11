@@ -13,6 +13,6 @@ export default function ToDashboardButton (props) {
     });
   };
   return (
-    <HeaderButton onClick={toDashboard}>Return to Dashboard</HeaderButton>
+    <HeaderButton onClick={toDashboard}>Back</HeaderButton>
   );
 }

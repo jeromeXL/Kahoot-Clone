@@ -13,10 +13,12 @@ const url = `http://localhost:${BACKEND_PORT}`;
 export default function GameInDashBoard (props) {
   const token = props.token;
   const quizId = props.quiz.id;
-  console.log(props.quiz);
-  console.log(`ID is : ${props.quiz.id}`);
   const [quizData, setQuizData] = useState({});
   const [questions, setQuestions] = useState([]);
+
+  const [sec, setSec] = useState(0);
+  const [min, setMin] = useState(0);
+
   // Fetch req to /get/admin/quiz/{quizid}
   const fetchQuizData = async () => {
     console.log(`fetching quiz data for ${props.quiz.name}`);
@@ -31,13 +33,31 @@ export default function GameInDashBoard (props) {
     } else {
       setQuizData(data);
       setQuestions(data.questions);
-      console.log(data);
     }
   }
+
+  const calcualteTime = () => {
+    const timeSum = questions.reduce((accumulator, curr) => {
+      return accumulator + curr.time;
+    }, 0);
+
+    if (!timeSum) {
+      setSec(0);
+      setMin(0);
+    } else {
+      setSec(timeSum % 60);
+      setMin(Math.floor(timeSum / 60));
+    }
+  }
+
   useEffect(async () => {
     await fetchQuizData();
   }, []);
-  console.log(quizData);
+
+  useEffect(async () => {
+    calcualteTime();
+  }, [questions]);
+
   return (
     <div style={{ backgroundColor: '#D9D9D9', width: '500px', borderRadius: '9px', margin: '50px 0px' }}>
       <div className='d-flex justify-content-around align-items-center p-2'>
@@ -46,7 +66,7 @@ export default function GameInDashBoard (props) {
           <GameTitle>{quizData.name}</GameTitle>
           <CreatedAtText>{quizData.createdAt}</CreatedAtText>
           <GameText>{questions.length} questions</GameText>
-          <GameText>20 minutes</GameText>
+          <GameText>{min} min {sec} sec</GameText>
         </div>
       </div>
       <div className='d-flex justify-content-around align-items-center p-3' style={{ padding: '10px' }}>
