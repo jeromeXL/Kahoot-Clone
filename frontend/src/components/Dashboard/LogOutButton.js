@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
+import HeaderButton from '../General/HeaderButton';
 import { useNavigate } from 'react-router-dom';
 
 import data from '../../config.json';
@@ -31,8 +31,8 @@ export default function LogOutButton (props) {
     });
   }
   return (
-    <Button type='button' style={{ backgroundColor: '#D9D9D9', borderColor: '#D9D9D9', color: 'black' }} onClick={logOut}>
+    <HeaderButton onClick={logOut}>
       Log out
-    </Button>
+    </HeaderButton>
   );
 }

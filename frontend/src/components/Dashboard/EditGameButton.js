@@ -1,9 +1,17 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router-dom';
 
 export default function EditGameButton (props) {
+  const navigate = useNavigate();
+  const id = props.id;
   const editGame = () => {
-    console.log('Edit Game: Fetch req?');
+    console.log(`Go to new route: /edit/quiz/${id}`);
+    navigate(`../edit/game/${id}`, {
+      state: {
+        token: props.token,
+      }
+    });
   };
   return (
     <Button type="button" style={{ backgroundColor: '#6178A8', borderColor: '#6178A8', color: 'white', width: '125px' }} onClick={editGame} className='p-2'>

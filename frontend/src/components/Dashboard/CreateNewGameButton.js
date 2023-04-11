@@ -1,5 +1,6 @@
 import { React, useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import HeaderButton from '../General/HeaderButton';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Toast from 'react-bootstrap/Toast';
@@ -24,48 +25,40 @@ export default function CreateNewGameButton (props) {
     setQuizName(event.target.value);
   }
 
-  const submit = (event) => {
+  const submit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
     setValidated(true);
     if (form.checkValidity() === false) {
       event.stopPropagation();
-      console.log('here');
       return;
     }
     // if no errors:
     handleClose();
     setValidated(false);
+
     // Fetch request
-    fetch(url + '/admin/quiz/new', {
+    const response = await fetch(url + '/admin/quiz/new', {
       method: 'POST',
       headers: { accept: 'application/json', Authorization: `Bearer ${props.token}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: quizName })
     })
-      .then((response) => {
-        if (!response.ok) {
-          console.log('Response error when creating new quiz');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        if (data.error) {
-          console.log(`ERROR: ${data.error}`);
-        } else {
-          handleShowToast();
-        }
-      })
-      .catch((err) => {
-        console.log('Other error when loading job feed');
-        console.log(err);
-      });
+
+    const data = await response.json();
+    if (data.error) {
+      console.log(`ERROR: ${data.error}`);
+    } else {
+      handleShowToast();
+      // Reload the dashboard to show new job
+      props.update();
+    }
   }
 
   return (
     <>
-    <Button type="button" style={{ backgroundColor: '#D9D9D9', borderColor: '#D9D9D9', color: 'black', fontWeight: 'bolder', width: '50px' }} onClick={handleShow}>
+    <HeaderButton onClick={handleShow}>
       +
-    </Button>
+    </HeaderButton>
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Create a new quiz</Modal.Title>
