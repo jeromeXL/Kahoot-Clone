@@ -4,20 +4,14 @@ import Form from 'react-bootstrap/Form';
 export default function Option (props) {
   return (
     <div className='d-flex justify-content-start align-items-center p-2'>
-      {props.multi === true
-        ? <Form.Check
-        type='checkbox'
+      <Form.Check
+        type={props.multi === true ? 'checkbox' : 'radio'}
         disabled
+        {...(props.correct === true) ? { checked: 'success' } : { }}
         style={{ paddingRight: '20px' }}
-        />
-        : <Form.Check
-        type='radio'
-        disabled
-        style={{ paddingRight: '20px' }}
-        />
-      }
+      />
       <Form.Control
-        value="Insert question data..."
+        value={props.option}
         disabled
       />
     </div>

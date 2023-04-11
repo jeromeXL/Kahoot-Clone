@@ -3,6 +3,6 @@ import Button from 'react-bootstrap/esm/Button';
 
 export default function AddQuestionButton () {
   return (
-    <Button> Add new Question </Button>
+    <Button> Add New Question </Button>
   );
 }
