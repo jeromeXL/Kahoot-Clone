@@ -60,7 +60,7 @@ export default function Login () {
       if (!response.ok) {
         console.log('response error!!!!');
         setLoginError(true);
-        setErrorMessage(response.error);
+        setErrorMessage('Invalid username or password');
       }
       return response.json();
     }).then((data) => {

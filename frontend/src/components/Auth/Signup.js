@@ -10,6 +10,7 @@ import Title from '../General/Title';
 import data from '../../config.json';
 import Subtitle from '../General/Subtitle';
 import LinkToPage from '../General/LinkToPage';
+import ErrorPopup from '../General/ErrorPopup';
 
 const BACKEND_PORT = data.BACKEND_PORT;
 const url = `http://localhost:${BACKEND_PORT}`;
@@ -40,13 +41,37 @@ export default function Signup () {
     console.log(`${confirmPassword} : ${event.target.value}`);
   }
 
+  const [signupError, setSignupError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
   const SignUpPress = async () => {
-    console.log('Signed Up');
+    console.log('Signup Button Pressed');
     console.log(`Email: ${email}. Name: ${name} Password: ${password}`);
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setSignupError(false);
+
+    if (email === '') {
+      setSignupError(true);
+      setErrorMessage('Email cannot be empty')
+      throw new Error('Email cannot be empty');
+    } else if (name === '') {
+      setSignupError(true);
+      setErrorMessage('Name cannot be empty')
+      throw new Error('Name cannot be empty');
+    } else if (!regex.test(email)) {
+      setSignupError(true);
+      setErrorMessage('Please use email format');
+      throw new Error('Please use email format');
+    } else if (password === '' || confirmPassword === '') {
+      setSignupError(true);
+      setErrorMessage('Password cannot be empty');
+      throw new Error('Password cannot be empty');
+    }
 
     if (password !== confirmPassword) {
-      console.log("ERROR: Passwords don't match");
-      throw new Error("Passwords don't match")
+      setSignupError(true);
+      setErrorMessage("Passwords don't match");
+      throw new Error("Passwords don't match");
     }
 
     // Fetch request
@@ -57,6 +82,8 @@ export default function Signup () {
     }).then((response) => {
       if (!response.ok) {
         console.log('response error!!!!');
+        setSignupError(true);
+        setErrorMessage('Email address already registered');
       }
       return response.json();
     }).then((data) => {
@@ -80,6 +107,7 @@ export default function Signup () {
       <Centre color="#39548D">
         <Title/>
         <Subtitle> Sign Up </Subtitle>
+        {signupError && <ErrorPopup message={errorMessage} />}
         <FormContainer color="#AAB8D4">
           <Form>
             <FloatingInput type="text" controlId="formBasicEmail" labelControlId="floatingEmail" label="Email Address" placeholder="Enter email" onChange={emailChange}/>
