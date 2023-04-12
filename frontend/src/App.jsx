@@ -12,7 +12,7 @@ import Join from './components/PlayerJoin/Join.js';
 import Default from './components/DefaultScreen/Default.js';
 import Dashboard from './components/Dashboard/Dashboard.js';
 import EditGame from './components/EditGame/EditGame.js';
-import EditQuestion from './components/EditGame/EditQuestion.js';
+import EditQuestion from './components/EditQuestion/EditQuestion.js';
 
 function App () {
   console.log("Let's go!")
