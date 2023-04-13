@@ -1,4 +1,5 @@
 import { React, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Centre from '../General/Centre';
 import FormContainer from '../General/FormContainer';
 import SubmitButton from '../General/SubmitButton';
@@ -27,6 +28,7 @@ export default function Join () {
 
   const [joinError, setJoinError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
   const joinGame = () => {
     console.log(`Joining game: ${sessionID}. Name: ${name}`);
@@ -53,6 +55,9 @@ export default function Join () {
     }).then((data) => {
       console.log('Log in data ', data);
       playerId = data.playerId;
+      navigate('/join/lobby', {
+        playerId: data.playerID
+      });
     }).catch((err) => {
       console.log(`ERROR: ${err}`);
     });
