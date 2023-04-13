@@ -117,6 +117,10 @@ export default function EditGame () {
         : <></>
       }
     </div>
+    {/* UseContext here */}
+    <div className='p-2'>
+      <SaveGameChanges id={params.id} name={name} thumbnail={img} questions={questions} token={token} {...(valid === false) ? { disabled: 'success' } : { }}/>
+    </div>
     <hr/>
     <div className='d-flex justify-content-between align-items-center p-2'>
       <h2>Questions - <i>{Math.floor(time / 60)} min {time % 60} sec</i> - <i>{points} points</i></h2>
@@ -129,10 +133,6 @@ export default function EditGame () {
           ? <Question key={index} token={token} title={question.title} points={question.points} time={question.time} options={question.options} multi={question.multi} id={index}/>
           : <span key={index}></span>
       ))}
-    </div>
-    {/* UseContext here */}
-    <div className='p-2'>
-      <SaveGameChanges id={params.id} name={name} thumbnail={img} questions={questions} token={token} {...(valid === false) ? { disabled: 'success' } : { }}/>
     </div>
     </QuestionsContext.Provider>
   );
