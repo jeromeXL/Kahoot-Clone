@@ -6,7 +6,6 @@ import { QuestionsContext } from './EditGame.js'
 export default function ToEditQuestionButton (props) {
   const navigate = useNavigate();
   const payload = useContext(QuestionsContext);
-  console.log('payload: ', payload);
   const toEditQuestion = () => {
     navigate(`./${props.id}`, {
       state: {

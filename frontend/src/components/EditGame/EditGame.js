@@ -92,7 +92,7 @@ export default function EditGame () {
   }, [questions]);
 
   return (
-    <QuestionsContext.Provider value={{ questions, data, id: params.id }}>
+    <QuestionsContext.Provider value={{ questions, data, id: params.id, token }}>
     <EditGameHeader token={token}/>
     <h2 className='p-3'> Game Details </h2>
     <div className='d-flex justify-content-between align-items-start p-2' style={{ margin: '0px 20px' }}>
@@ -124,7 +124,7 @@ export default function EditGame () {
     <hr/>
     <div className='d-flex justify-content-between align-items-center p-2'>
       <h2>Questions - <i>{Math.floor(time / 60)} min {time % 60} sec</i> - <i>{points} points</i></h2>
-      <AddQuestionButton/>
+      <AddQuestionButton update={fetchQuizData}/>
     </div>
     <div>
       <br/>
