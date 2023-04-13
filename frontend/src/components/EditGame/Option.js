@@ -8,7 +8,7 @@ export default function Option (props) {
         type={props.multi === true ? 'checkbox' : 'radio'}
         disabled
         {...(props.correct === true) ? { checked: 'success' } : { }}
-        style={{ paddingRight: '20px' }}
+        inline
       />
       <Form.Control
         value={props.option}
