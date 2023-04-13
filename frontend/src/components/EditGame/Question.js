@@ -33,8 +33,16 @@ export default function Question (props) {
       </div>
 
       <div className='d-flex justify-content-between align-items-center p-2'>
-        <ToEditQuestionButton id={props.id}/>
+        {props.edit === 'false'
+          ? <>
+        <ToEditQuestionButton token={props.token} id={props.id}/>
         <Button> Delete Question </Button>
+        </>
+          : <>
+        <Button> Cancel </Button>
+        <Button> Save Changes </Button>
+        </>
+      }
       </div>
     </div>
   );
