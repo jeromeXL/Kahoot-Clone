@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, createContext } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import EditGameHeader from './EditGameHeader';
 import Question from './Question';
@@ -10,6 +10,7 @@ import { fileToDataUrl } from '../helper';
 
 const BACKEND_PORT = data.BACKEND_PORT;
 const url = `http://localhost:${BACKEND_PORT}`;
+export const QuestionsContext = createContext([]);
 
 export default function EditGame () {
   const location = useLocation();
@@ -87,10 +88,11 @@ export default function EditGame () {
     if (questions.thumbnail !== null) {
       setImg(questions.thumbnail);
     }
+    console.log(questions);
   }, [questions]);
 
   return (
-    <>
+    <QuestionsContext.Provider value={questions}>
     <EditGameHeader token={token}/>
     <h2 className='p-3'> Game Details </h2>
     <div className='d-flex justify-content-between align-items-start p-2' style={{ margin: '0px 20px' }}>
@@ -123,14 +125,15 @@ export default function EditGame () {
     <div>
       <br/>
       {questions.map((question, index) => (
-        question.title && question.points && question.time && question.options && question.multi
-          ? <Question key={index} title={question.title} points={question.points} time={question.time} options={question.options} multi={question.multi} id={index} edit='false'/>
+        question.title
+          ? <Question key={index} token={token} title={question.title} points={question.points} time={question.time} options={question.options} multi={question.multi} edit='false' id={index}/>
           : <span key={index}></span>
       ))}
     </div>
+    {/* UseContext here */}
     <div className='p-2'>
       <SaveGameChanges id={params.id} name={name} thumbnail={img} questions={questions} token={token} {...(valid === false) ? { disabled: 'success' } : { }}/>
     </div>
-    </>
+    </QuestionsContext.Provider>
   );
 }

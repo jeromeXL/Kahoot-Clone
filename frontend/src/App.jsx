@@ -14,7 +14,7 @@ import Default from './components/DefaultScreen/Default.js';
 import Dashboard from './components/Dashboard/Dashboard.js';
 import EditGame from './components/EditGame/EditGame.js';
 import Review from './components/Review/Review.js';
-import EditQuestion from './components/EditGame/EditQuestion.js';
+import EditQuestion from './components/EditQuestion/EditQuestion.js';
 
 function App () {
   console.log("Let's go!")
