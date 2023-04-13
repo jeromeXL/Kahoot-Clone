@@ -9,11 +9,10 @@ export default function Question (props) {
     <div style={{ width: '800px', backgroundColor: '#AAB8D4', margin: '20px auto', padding: '20px' }}>
       <div className='d-flex justify-content-start align-items-center p-2'>
         <h3 className='p-2 flex-grow-1'>
-          {/* {props.title} */}
-          <Form.Control {...(props.edit === 'false') ? { plaintext: 'success', readOnly: 'success' } : { }} defaultValue={props.title} />
+          {props.title}
+
         </h3>
         <h4 className='p-2'>
-          {/* 500 points (30 seconds) */}
           {props.points} points ({props.time} seconds)
         </h4>
       </div>
@@ -33,16 +32,8 @@ export default function Question (props) {
       </div>
 
       <div className='d-flex justify-content-between align-items-center p-2'>
-        {props.edit === 'false'
-          ? <>
         <ToEditQuestionButton token={props.token} id={props.id}/>
         <Button> Delete Question </Button>
-        </>
-          : <>
-        <Button> Cancel </Button>
-        <Button> Save Changes </Button>
-        </>
-      }
       </div>
     </div>
   );

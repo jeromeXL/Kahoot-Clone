@@ -92,7 +92,7 @@ export default function EditGame () {
   }, [questions]);
 
   return (
-    <QuestionsContext.Provider value={questions}>
+    <QuestionsContext.Provider value={{ questions, data, id: params.id }}>
     <EditGameHeader token={token}/>
     <h2 className='p-3'> Game Details </h2>
     <div className='d-flex justify-content-between align-items-start p-2' style={{ margin: '0px 20px' }}>
@@ -126,7 +126,7 @@ export default function EditGame () {
       <br/>
       {questions.map((question, index) => (
         question.title
-          ? <Question key={index} token={token} title={question.title} points={question.points} time={question.time} options={question.options} multi={question.multi} edit='false' id={index}/>
+          ? <Question key={index} token={token} title={question.title} points={question.points} time={question.time} options={question.options} multi={question.multi} id={index}/>
           : <span key={index}></span>
       ))}
     </div>
