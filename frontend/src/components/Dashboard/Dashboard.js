@@ -57,7 +57,7 @@ export default function Dashboard () {
         </ul>
         <br/>
         {quizzes.map((quiz, index) => (
-          <GameInDashBoard key={index} token={token} quiz={quiz}/>
+          <GameInDashBoard key={index} token={token} quiz={quiz} update={fetchAllQuizzes}/>
         ))}
       </GamesContainer>
     </>
