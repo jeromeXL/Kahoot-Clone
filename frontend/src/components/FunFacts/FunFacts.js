@@ -11,7 +11,13 @@ export default function FunFacts () {
     'The human brain is the most complex structure in the known universe.',
     'In Japan, there are more pets than children',
     'The Great Wall of China is not visible from space.',
-    'An octopus has three hearts.'
+    'An octopus has three hearts.',
+    'There are 293 ways to make change for a dollar.',
+    'The average person`s left hand does 56% of the typing (when using the proper position of the hands on the keyboard; Hunting and pecking doesn`t count!).',
+    'Almonds are a member of the peach family.',
+    'The Eiffel Tower can be 15 cm taller during the summer, due to thermal expansion meaning the iron heats up, the particles gain kinetic energy and take up more space.',
+    'Australia is wider than the moon. The moon sits at 3400km in diameter, while Australia’s diameter from east to west is almost 4000km.',
+    'The Ancient Romans used to drop a piece of toast into their wine for good health - hence why we "raise a toast".'
   ];
 
   const randomFact = facts[Math.floor(Math.random() * facts.length)];
@@ -19,7 +25,7 @@ export default function FunFacts () {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
       <h2>Fun Fact:</h2>
-      <p>{randomFact}</p>
+      <p style={{ textAlign: 'center' }}>{randomFact}</p>
     </div>
   );
 }
