@@ -37,7 +37,8 @@ export default function Join () {
     if (name === '') {
       setJoinError(true);
       setErrorMessage('Name cannot be empty');
-      // throw new Error('Name cannot be empty');
+      console.log('Name empty, returned')
+      return;
     }
 
     // Fetch request
