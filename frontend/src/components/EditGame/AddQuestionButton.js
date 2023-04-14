@@ -6,6 +6,7 @@ import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
 import { QuestionsContext } from '../EditGame/EditGame.js'
 import data from '../../config.json';
+import { fileToDataUrl } from '../helper.js';
 
 const BACKEND_PORT = data.BACKEND_PORT;
 const url = `http://localhost:${BACKEND_PORT}`;
@@ -95,6 +96,35 @@ export default function AddQuestionButton (props) {
     setCorrect(tmpCorrect);
   }
 
+  const [isImg, setIsImg] = useState(false);
+  const [isLink, setIsLink] = useState(false);
+
+  const changeAttachment = (event) => {
+    console.log(event.target.value);
+    if (event.target.value === 'img') {
+      setIsImg(true);
+      setIsLink(false);
+    } else if (event.target.value === 'link') {
+      setIsImg(false);
+      setIsLink(true);
+    } else {
+      setIsImg(false);
+      setIsLink(false);
+    }
+  }
+
+  const [img, setImg] = useState(props.image);
+  const imageChange = async (event) => {
+    const files = Array.from(event.target.files);
+    const data = await fileToDataUrl(files[0]);
+    setImg(data);
+  }
+
+  const [link, setLink] = useState(props.link);
+  const linkChange = (event) => {
+    setLink(event.target.value);
+  }
+
   const submit = async (event) => {
     if (title === '') {
       alert('Question cannot be empty');
@@ -138,7 +168,7 @@ export default function AddQuestionButton (props) {
       obj[options[i]] = correct[i];
       optionsToSubmit.push(obj);
     }
-    const newQuestion = { title, multi, options: optionsToSubmit, points: pointsNumber, time: timeNumber };
+    const newQuestion = { title, multi, options: optionsToSubmit, points: pointsNumber, time: timeNumber, link: isLink ? link : null, image: isImg ? img : null };
     console.log('New question: ', newQuestion);
     allQuestions.push(newQuestion);
     allGameData.questions = allQuestions;
@@ -186,6 +216,24 @@ export default function AddQuestionButton (props) {
             <Form.Label>Time Limit</Form.Label>
             <Form.Control type="number" placeholder="Enter question time limit" required onChange={changeTime} />
           </Form.Group>
+          <hr/>
+          <div className='p-2'>
+            <h3>Links/Images</h3>
+            <Form.Select aria-label="select attachment type" onChange={changeAttachment} style={{ marginBottom: '20px' }}>
+              <option value="none">No attachment</option>
+              <option value="img">Image</option>
+              <option value="link">Youtube Link</option>
+            </Form.Select>
+            {isLink && <>
+              <Form.Label>Enter Youtube URL</Form.Label>
+              <Form.Control onChange={linkChange}/>
+            </>}
+            {isImg && <>
+              <Form.Label>Upload Image</Form.Label>
+              <Form.Control type="file" accept="image/*" onChange={imageChange}/>
+            </>}
+          </div>
+          <hr/>
           <div>
             <Form.Check
               type="switch"
