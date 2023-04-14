@@ -1,12 +1,8 @@
 import { React } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import data from '../../config.json';
 import EditableQuestion from './EditableQuestion';
 
-const BACKEND_PORT = data.BACKEND_PORT;
-const url = `http://localhost:${BACKEND_PORT}`
-
-export default function EditQuestion (props) {
+export default function EditQuestion () {
   const location = useLocation();
   const token = location.state.token;
   const allQuestions = location.state.questions;
@@ -20,15 +16,8 @@ export default function EditQuestion (props) {
   console.log('question to be edited:', question);
   return (
     <>
-      Testing
-      {url}
-      <hr/>
-      {token}
-      <hr/>
-      {params.question}
-      <hr/>
       {question
-        ? <EditableQuestion title={question.title} points={question.points} time={question.time} options={question.options} multi={question.multi} edit='true' token={token} allQuestions={allQuestions} index={params.question} data={allData} id={gameId}/>
+        ? <EditableQuestion title={question.title} points={question.points} time={question.time} options={question.options} multi={question.multi} edit='true' token={token} allQuestions={allQuestions} index={params.question} data={allData} id={gameId} link={question.link} image={question.image}/>
         : <></>
       }
     </>

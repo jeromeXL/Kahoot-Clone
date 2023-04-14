@@ -41,11 +41,7 @@ export default function Dashboard () {
     <>
       <DashboardHeader token={token} update={fetchAllQuizzes}/>
       <GamesContainer>
-        {/* <GameInDashBoard/>
-        <GameInDashBoard/>
-        <GameInDashBoard/>
-        <GameInDashBoard/> */}
-        <ul>
+        {/* <ul>
         {quizzes.map((quiz, index) => (
           <li key={index}>
             {quiz.name}
@@ -55,7 +51,7 @@ export default function Dashboard () {
           </li>
         ))}
         </ul>
-        <br/>
+        <br/> */}
         {quizzes.map((quiz, index) => (
           <GameInDashBoard key={index} token={token} quiz={quiz} update={fetchAllQuizzes}/>
         ))}
