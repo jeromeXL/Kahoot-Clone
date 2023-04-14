@@ -130,7 +130,7 @@ export default function EditGame () {
       <br/>
       {questions.map((question, index) => (
         question.title
-          ? <Question key={index} token={token} title={question.title} points={question.points} time={question.time} options={question.options} multi={question.multi} id={index}/>
+          ? <Question key={index} token={token} title={question.title} points={question.points} time={question.time} options={question.options} multi={question.multi} id={index} image={question.image} link={question.link}/>
           : <span key={index}></span>
       ))}
     </div>

@@ -3,6 +3,8 @@ import Form from 'react-bootstrap/Form';
 import Option from './Option';
 import Button from 'react-bootstrap/esm/Button';
 import ToEditQuestionButton from './ToEditQuestionButton';
+import Ratio from 'react-bootstrap/Ratio';
+import ReactPlayer from 'react-player/youtube'
 
 export default function Question (props) {
   return (
@@ -12,10 +14,29 @@ export default function Question (props) {
           {props.title}
 
         </h3>
-        <h4 className='p-2'>
+        <h4 className='p-2' style={{ margin: '20px 0px' }}>
           {props.points} points ({props.time} seconds)
         </h4>
       </div>
+      <hr/>
+      <div className='p-2'>
+      <h3>Links/Images</h3>
+      {props.image && props.image !== null
+        ? <img src={props.image} alt={`image for question ${props.id}`} style={{ width: '500px', height: 'auto', margin: 'auto' }}/>
+        : <></>
+      }
+      {props.link && props.link !== null
+        ? <Ratio aspectRatio={'16x9'}>
+            <ReactPlayer url={props.link} controls/>
+          </Ratio>
+        : <></>
+      }
+      {props.link === null && props.image === null
+        ? <>No image / link attached</>
+        : <></>
+      }
+      </div>
+      <hr/>
       <div>
         <Form.Check
           type="switch"
