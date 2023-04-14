@@ -49,6 +49,7 @@ export default function EditableQuestion (props) {
       setCorrect(oldArray => [...oldArray, opt[Object.keys(opt)[0]]]);
     }
   }
+
   useEffect(() => {
     populateCorrect();
   }, []);

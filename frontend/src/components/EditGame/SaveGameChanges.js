@@ -1,13 +1,11 @@
 import React from 'react';
 import Button from 'react-bootstrap/esm/Button';
 import data from '../../config.json';
-import { useNavigate } from 'react-router-dom';
 
 const BACKEND_PORT = data.BACKEND_PORT;
 const url = `http://localhost:${BACKEND_PORT}`;
 
 export default function SaveGameChanges (props) {
-  const navigate = useNavigate();
   const token = props.token;
   const update = async () => {
     const response = await fetch(url + '/admin/quiz/' + props.id, {
@@ -20,14 +18,10 @@ export default function SaveGameChanges (props) {
     if (data.error) {
       console.log(`ERROR: ${data.error}`);
     } else {
-      navigate('../../dashboard', {
-        state: {
-          token,
-        }
-      });
+      alert('Details successfully updated');
     }
   }
   return (
-    <Button {...props} onClick={update}> Save Changes </Button>
+    <Button {...props} onClick={update}> Save Changes to Game Details </Button>
   );
 }
