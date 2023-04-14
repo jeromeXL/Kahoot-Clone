@@ -15,6 +15,7 @@ import Dashboard from './components/Dashboard/Dashboard.js';
 import EditGame from './components/EditGame/EditGame.js';
 import Review from './components/Review/Review.js';
 import EditQuestion from './components/EditQuestion/EditQuestion.js';
+import Lobby from './components/PlayerJoin/Lobby.js';
 
 function App () {
   console.log("Let's go!")
@@ -30,6 +31,7 @@ function App () {
           <Route path="/edit/game/:id" element={<EditGame/>} />
           <Route path="/review" element={<Review/>} />
           <Route path="/edit/game/:id/:question" element={<EditQuestion/>} />
+          <Route path="/join/lobby" element={<Lobby/>} />
         </Routes>
       </BrowserRouter>
     </>
