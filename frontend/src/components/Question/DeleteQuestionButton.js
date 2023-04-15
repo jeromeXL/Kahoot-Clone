@@ -34,8 +34,9 @@ export default function DeleteQuestionButton (props) {
     console.log('data is : ', data);
     if (data.error) {
       console.log(`ERROR: ${data.error}`);
+      alert(`There was an error when deleting the question : ${data.error}`);
     } else {
-      alert('Successfully  deleted question');
+      alert('Successfully deleted question');
       updateQuestionFeed();
       handleClose();
     }
