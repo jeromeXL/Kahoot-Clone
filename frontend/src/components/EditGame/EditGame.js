@@ -1,12 +1,13 @@
 import { React, useState, useEffect, createContext } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import EditGameHeader from './EditGameHeader';
-import Question from './Question';
+import Question from '../Question/Question';
 import AddQuestionButton from './AddQuestionButton';
 import Form from 'react-bootstrap/Form';
 import data from '../../config.json';
 import SaveGameChanges from './SaveGameChanges';
 import { fileToDataUrl } from '../helper';
+import Feedback from '../General/Feedback';
 
 const BACKEND_PORT = data.BACKEND_PORT;
 const url = `http://localhost:${BACKEND_PORT}`;
@@ -92,7 +93,7 @@ export default function EditGame () {
   }, [questions]);
 
   return (
-    <QuestionsContext.Provider value={{ questions, data, id: params.id, token }}>
+    <QuestionsContext.Provider value={{ questions, data, id: params.id, token, update: fetchQuizData }}>
     <EditGameHeader token={token}/>
     <h2 className='p-3'> Game Details </h2>
     <div className='d-flex justify-content-between align-items-start p-2' style={{ margin: '0px 20px' }}>
@@ -101,9 +102,9 @@ export default function EditGame () {
         <Form.Control style={{ maxWidth: '500px', minWidth: '300px' }}
           defaultValue={data.name} onKeyUp={nameChange}
         />
-        {!valid && <Form.Text style={{ color: 'red' }}>
+        {!valid && <Feedback>
           The question must have a name
-        </Form.Text>}
+        </Feedback>}
       </div>
       <div>
         <Form.Label>Upload thumbnail</Form.Label>
