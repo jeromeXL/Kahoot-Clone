@@ -7,8 +7,6 @@ export default function MultiChoiceToggle (props) {
       type="switch"
       label="multiple correct answers"
       className="mb-3"
-      // {...(multi === true) ? { checked: 'success' } : { }}
-      // onChange={switchChange}
       {...props}
     />
   );

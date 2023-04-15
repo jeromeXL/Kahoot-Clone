@@ -1,7 +1,6 @@
 import { React, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/esm/Button';
 import data from '../../config.json';
 import { fileToDataUrl } from '../helper';
 import EditPointsInput from './EditPointsInput';
@@ -13,6 +12,7 @@ import ExistingImage from './ExistingImage';
 import MultiChoiceToggle from '../EditGame/MultiChoiceToggle';
 import AddOptionButton from '../EditGame/AddOptionButton';
 import DeleteOptionButton from '../EditGame/DeleteOptionButton';
+import SmallSubmitButton from '../General/SmallSubmitButton'
 
 const BACKEND_PORT = data.BACKEND_PORT;
 const url = `http://localhost:${BACKEND_PORT}`;
@@ -256,8 +256,10 @@ export default function EditableQuestion (props) {
         </Form>
       </div>
       <div className='d-flex justify-content-between align-items-center p-2'>
-        <Button onClick={back}> Cancel </Button>
-        <Button onClick={submit}> Save Changes </Button>
+        {/* <Button onClick={back}> Cancel </Button> */}
+        <SmallSubmitButton onClick={back} color='#AC0000'> Cancel </SmallSubmitButton>
+        {/* <Button onClick={submit}> Save Changes </Button> */}
+        <SmallSubmitButton onClick={submit} color='#017BFE'> Save Changes </SmallSubmitButton>
       </div>
     </div>
   );

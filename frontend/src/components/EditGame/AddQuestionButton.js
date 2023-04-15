@@ -17,6 +17,7 @@ import MultiChoiceToggle from './MultiChoiceToggle.js';
 import DeleteOptionButton from './DeleteOptionButton.js';
 import AddOptionButton from './AddOptionButton.js';
 import ToastSuccessText from './ToastSuccessText.js';
+import SmallSubmitButton from '../General/SmallSubmitButton.js';
 
 const BACKEND_PORT = data.BACKEND_PORT;
 const url = `http://localhost:${BACKEND_PORT}`;
@@ -259,12 +260,14 @@ export default function AddQuestionButton (props) {
           </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
+        {/* <Button variant="secondary" onClick={handleClose}>
           Cancel
-        </Button>
-        <Button variant="primary" onClick={submit}>
+        </Button> */}
+        <SmallSubmitButton onClick={handleClose} color='#AC0000'> Cancel </SmallSubmitButton>
+        {/* <Button variant="primary" onClick={submit}>
           Create question
-        </Button>
+        </Button> */}
+        <SmallSubmitButton onClick={submit} color='#017BFE'> Create question </SmallSubmitButton>
       </Modal.Footer>
     </Modal>
     <ToastContainer className="p-3" position='top-end'>

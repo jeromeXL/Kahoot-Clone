@@ -13,7 +13,6 @@ import ErrorPopup from '../General/ErrorPopup';
 
 const BACKEND_PORT = data.BACKEND_PORT;
 const url = `http://localhost:${BACKEND_PORT}`;
-let token;
 
 export default function Login () {
   const navigate = useNavigate();
@@ -65,8 +64,6 @@ export default function Login () {
       return response.json();
     }).then((data) => {
       console.log('Log in data ', data);
-      // If authorized, change to dashboard page. Somehow use token
-      token = data.token;
       if (data.token) {
         console.log('token is valid');
         navigate('/dashboard', {
@@ -101,5 +98,3 @@ export default function Login () {
       </>
   );
 }
-
-export { token };
