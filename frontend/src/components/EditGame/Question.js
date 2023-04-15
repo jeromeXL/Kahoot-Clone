@@ -27,7 +27,7 @@ export default function Question (props) {
       }
       {props.link && props.link !== null
         ? <Ratio aspectRatio={'16x9'}>
-            <ReactPlayer url={props.link} controls/>
+          <ReactPlayer url={props.link} controls/>
           </Ratio>
         : <></>
       }

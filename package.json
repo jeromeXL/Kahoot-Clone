@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "react-copy-to-clipboard": "^5.1.0",
+    "react-player": "^2.12.0"
+  }
+}

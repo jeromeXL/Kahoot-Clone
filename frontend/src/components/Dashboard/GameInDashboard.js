@@ -70,7 +70,7 @@ export default function GameInDashBoard (props) {
         </div>
       </div>
       <div className='d-flex justify-content-around align-items-center p-3' style={{ padding: '10px' }}>
-        <StartGameButton/>
+        <StartGameButton quizId={quizId} token={token}/>
         <EditGameButton questions={questions} id={quizId} token={token}/>
         <DeleteGameButton quizId={quizId} token={token} update={props.update}/>
       </div>
