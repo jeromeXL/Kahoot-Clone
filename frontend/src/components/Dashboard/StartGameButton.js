@@ -25,6 +25,11 @@ export default function StartGameButton (props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  // Results modal 
+  const [RShow, setRShow] = useState(false);
+  const handleRClose = () => setRShow(false);
+  const handleRShow = () => setRShow(true);
+
   const [onBefore, setOnBefore] = useState(false);
 
   const link = `${url}/join/game/${quizId}`;
@@ -63,6 +68,7 @@ export default function StartGameButton (props) {
       console.log(`ERROR: ${data.error}`);
     } else {
       setOnBefore(true);
+      handleRShow();
     }
   }
 
@@ -90,6 +96,18 @@ export default function StartGameButton (props) {
           <CopyToClipboard text={link}>
             <Button variant="primary" onClick={() => handleShowToast()}>Copy Link</Button>
           </CopyToClipboard>
+        </Modal.Footer>
+    </Modal>
+    <Modal show={RShow} onHide={handleRClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Game Stopped!</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        Would you like to view results?
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleRClose}>No</Button>
+        <Button variant="primary">Yes</Button>
         </Modal.Footer>
     </Modal>
     <div>

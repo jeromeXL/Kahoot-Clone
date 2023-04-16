@@ -33,7 +33,7 @@ function App () {
           <Route path="/edit/game/:id" element={<EditGame/>} />
           <Route path="/review" element={<Review/>} />
           <Route path="/edit/game/:id/:question" element={<EditQuestion/>} />
-          <Route path="/join/lobby" element={<Lobby/>} />
+          <Route path="/join/lobby/:id" element={<Lobby/>} />
           <Route path="/join/game/:id" element={<InGameScreenPlayer/>} />
           <Route path="/admin/game/:id" element={<InGameScreenAdmin/>} />
         </Routes>

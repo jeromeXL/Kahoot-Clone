@@ -56,7 +56,7 @@ export default function Join () {
     }).then((data) => {
       console.log('Log in data ', data);
       playerId = data.playerId;
-      navigate('/join/lobby', {
+      navigate(`/join/lobby/${sessionID}`, {
         playerId: data.playerID
       });
     }).catch((err) => {
