@@ -37,7 +37,8 @@ export default function Join () {
     if (name === '') {
       setJoinError(true);
       setErrorMessage('Name cannot be empty');
-      // throw new Error('Name cannot be empty');
+      console.log('Name empty, returned')
+      return;
     }
 
     // Fetch request
@@ -55,7 +56,7 @@ export default function Join () {
     }).then((data) => {
       console.log('Log in data ', data);
       playerId = data.playerId;
-      navigate('/join/lobby', {
+      navigate(`/join/lobby/${sessionID}`, {
         playerId: data.playerID
       });
     }).catch((err) => {

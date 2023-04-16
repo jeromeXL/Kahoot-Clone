@@ -14,6 +14,8 @@ import EditGame from './components/EditGame/EditGame.js';
 import Review from './components/Review/Review.js';
 import EditQuestion from './components/EditQuestion/EditQuestion.js';
 import Lobby from './components/PlayerJoin/Lobby.js';
+import InGameScreenPlayer from './components/Game/InGameScreenPlayer.js';
+import InGameScreenAdmin from './components/Game/InGameScreenAdmin.js';
 
 function App () {
   console.log("Let's go!")
@@ -29,7 +31,9 @@ function App () {
           <Route path="/edit/game/:id" element={<EditGame/>} />
           <Route path="/review" element={<Review/>} />
           <Route path="/edit/game/:id/:question" element={<EditQuestion/>} />
-          <Route path="/join/lobby" element={<Lobby/>} />
+          <Route path="/join/lobby/:id" element={<Lobby/>} />
+          <Route path="/join/game/:id" element={<InGameScreenPlayer/>} />
+          <Route path="/admin/game/:id" element={<InGameScreenAdmin/>} />
         </Routes>
       </BrowserRouter>
     </>
