@@ -1,5 +1,5 @@
 import React from 'react';
-import '@fontsource/space-grotesk';
+// import '@fontsource/space-grotesk';
 
 export default function Title () {
   return (

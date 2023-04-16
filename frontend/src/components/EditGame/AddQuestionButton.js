@@ -7,6 +7,17 @@ import ToastContainer from 'react-bootstrap/ToastContainer';
 import { QuestionsContext } from '../EditGame/EditGame.js'
 import data from '../../config.json';
 import { fileToDataUrl } from '../helper.js';
+import AttachmentDropDown from './AttachmentDropDown.js';
+import QuestionInput from './QuestionInput.js';
+import PointInput from './PointInput.js';
+import TimeInput from './TimeInput.js';
+import YoutubeInput from './YoutubeInput.js';
+import ImageInput from './ImageInput.js';
+import MultiChoiceToggle from './MultiChoiceToggle.js';
+import DeleteOptionButton from './DeleteOptionButton.js';
+import AddOptionButton from './AddOptionButton.js';
+import ToastSuccessText from './ToastSuccessText.js';
+import SmallSubmitButton from '../General/SmallSubmitButton.js';
 
 const BACKEND_PORT = data.BACKEND_PORT;
 const url = `http://localhost:${BACKEND_PORT}`;
@@ -125,7 +136,7 @@ export default function AddQuestionButton (props) {
     setLink(event.target.value);
   }
 
-  const submit = async (event) => {
+  const submit = async () => {
     if (title === '') {
       alert('Question cannot be empty');
       return;
@@ -205,43 +216,28 @@ export default function AddQuestionButton (props) {
       </Modal.Header>
       <Modal.Body>
           <Form.Group className="mb-3" controlId="formQuizName">
-            <Form.Label>Question</Form.Label>
-            <Form.Control type="text" placeholder="Enter a question" required onChange={changeQuestion} />
+            <QuestionInput onChange={changeQuestion}/>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formPoints">
-            <Form.Label>Maximum Points</Form.Label>
-            <Form.Control type="number" placeholder="Enter the max points" required onChange={changePoints} />
+            <PointInput onChange={changePoints}/>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formTime">
-            <Form.Label>Time Limit</Form.Label>
-            <Form.Control type="number" placeholder="Enter question time limit" required onChange={changeTime} />
+            <TimeInput onChange={changeTime}/>
           </Form.Group>
           <hr/>
           <div className='p-2'>
             <h3>Links/Images</h3>
-            <Form.Select aria-label="select attachment type" onChange={changeAttachment} style={{ marginBottom: '20px' }}>
-              <option value="none">No attachment</option>
-              <option value="img">Image</option>
-              <option value="link">Youtube Link</option>
-            </Form.Select>
+            <AttachmentDropDown onChange={changeAttachment}/>
             {isLink && <>
-              <Form.Label>Enter Youtube URL</Form.Label>
-              <Form.Control onChange={linkChange}/>
+              <YoutubeInput onChange={linkChange}/>
             </>}
             {isImg && <>
-              <Form.Label>Upload Image</Form.Label>
-              <Form.Control type="file" accept="image/*" onChange={imageChange}/>
+              <ImageInput onChange={imageChange}/>
             </>}
           </div>
           <hr/>
           <div>
-            <Form.Check
-              type="switch"
-              label="multiple correct answers"
-              className="mb-3"
-              {...(multi === true) ? { checked: 'success' } : { }}
-              onChange={switchChange}
-            />
+            <MultiChoiceToggle {...(multi === true) ? { checked: 'success' } : { }} onChange={switchChange} />
           </div>
           <div>
             <Form>
@@ -259,24 +255,25 @@ export default function AddQuestionButton (props) {
             </Form>
           </div>
           <div className='d-flex justify-content-between align-items-center p-2'>
-            <Button onClick={deleteOption} {...(numOptions <= 2) ? { disabled: 'success' } : { }}> Delete Option </Button>
-            <Button onClick={addOption} {...(numOptions >= 6) ? { disabled: 'success' } : { }}> Add Option </Button>
+            <DeleteOptionButton onClick={deleteOption} {...(numOptions <= 2) ? { disabled: 'success' } : { }}/>
+            <AddOptionButton onClick={addOption} {...(numOptions >= 6) ? { disabled: 'success' } : { }}/>
           </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button variant="primary" onClick={submit}>
-            Create question
-          </Button>
+        {/* <Button variant="secondary" onClick={handleClose}>
+          Cancel
+        </Button> */}
+        <SmallSubmitButton onClick={handleClose} color='#AC0000'> Cancel </SmallSubmitButton>
+        {/* <Button variant="primary" onClick={submit}>
+          Create question
+        </Button> */}
+        <SmallSubmitButton onClick={submit} color='#017BFE'> Create question </SmallSubmitButton>
       </Modal.Footer>
     </Modal>
     <ToastContainer className="p-3" position='top-end'>
       <Toast show={showToast} onClose={handleCloseToast} bg='success' delay={3000} autohide>
         <Toast.Header closeButton={false}>
-              <strong className="me-auto">BigBrain</strong>
-              <small className="text-muted">just now</small>
+              <ToastSuccessText/>
         </Toast.Header>
         <Toast.Body>Sucessfully created a new quiz!</Toast.Body>
       </Toast>
