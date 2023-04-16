@@ -43,7 +43,6 @@ export default function Question (props) {
       <hr/>
       <div>
         <MultiChoiceToggle disabled {...(props.multi === true) ? { checked: 'success' } : { }}/>
-
       </div>
       <div>
         {props.options.map((option, index) => (

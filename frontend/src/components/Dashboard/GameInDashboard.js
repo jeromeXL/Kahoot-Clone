@@ -6,6 +6,10 @@ import EditGameButton from './EditGameButton';
 import DeleteGameButton from './DeleteGameButton';
 import CreatedAtText from './CreatedAtText';
 import data from '../../config.json';
+import GameButtonContainer from './GameButtonContainer';
+import GameDetailsContainer from './GameDetailsContainer';
+import GameThumbnail from './GameThumbnail';
+import GameTextDetailContainer from './GameTextDetailContainer';
 
 const BACKEND_PORT = data.BACKEND_PORT;
 const url = `http://localhost:${BACKEND_PORT}`;
@@ -60,7 +64,7 @@ export default function GameInDashBoard (props) {
 
   return (
     <div style={{ backgroundColor: '#D9D9D9', width: '500px', borderRadius: '9px', margin: '50px 0px' }}>
-      <div className='d-flex justify-content-around align-items-center p-2'>
+      {/* <div className='d-flex justify-content-around align-items-center p-2'>
         <img style={{ width: '135px', height: 'auto', marginLeft: '18px', marginTop: '10px', borderRadius: '9px' }} src={quizData.thumbnail === null ? require('./defaultGameImage.png') : quizData.thumbnail} className='p-1'/>
         <div className='d-flex flex-column justify-content-around align-items-start flex-grow-1 p-1' >
           <GameTitle>{quizData.name}</GameTitle>
@@ -68,12 +72,26 @@ export default function GameInDashBoard (props) {
           <GameText>{questions.length} questions</GameText>
           <GameText>{min} min {sec} sec</GameText>
         </div>
-      </div>
-      <div className='d-flex justify-content-around align-items-center p-3' style={{ padding: '10px' }}>
+      </div> */}
+      <GameDetailsContainer>
+        <GameThumbnail img={quizData.thumbnail} id={quizId}/>
+        <GameTextDetailContainer>
+          <GameTitle>{quizData.name}</GameTitle>
+          <CreatedAtText>{quizData.createdAt}</CreatedAtText>
+          <GameText>{questions.length} questions</GameText>
+          <GameText>{min} min {sec} sec</GameText>
+        </GameTextDetailContainer>
+      </GameDetailsContainer>
+      {/* <div className='d-flex justify-content-around align-items-center p-3' style={{ padding: '10px' }}>
         <StartGameButton/>
         <EditGameButton questions={questions} id={quizId} token={token}/>
         <DeleteGameButton quizId={quizId} token={token} update={props.update}/>
-      </div>
+      </div> */}
+      <GameButtonContainer>
+        <StartGameButton/>
+        <EditGameButton questions={questions} id={quizId} token={token}/>
+        <DeleteGameButton quizId={quizId} token={token} update={props.update}/>
+      </GameButtonContainer>
     </div>
   );
 }

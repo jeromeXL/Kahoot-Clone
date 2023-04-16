@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from 'react';
 import DashboardHeader from './DashboardHeader';
-import '@fontsource/inter';
+// import '@fontsource/inter';
 import GamesContainer from './GamesContainer';
 import GameInDashBoard from './GameInDashboard';
 import { useLocation } from 'react-router-dom';
