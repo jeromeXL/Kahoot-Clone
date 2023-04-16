@@ -9,9 +9,7 @@ export default function EditQuestion () {
   const allData = location.state.data;
   const gameId = location.state.id;
   console.log('All data: ', allData);
-  // console.log('all questions:', allQuestions)
   const params = useParams();
-  // console.log('index = ', params.question);
   const question = allQuestions ? allQuestions[params.question] : undefined;
   console.log('question to be edited:', question);
   return (

@@ -25,7 +25,7 @@ export default function StartGameButton (props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  // Results modal 
+  // Results modal
   const [RShow, setRShow] = useState(false);
   const handleRClose = () => setRShow(false);
   const handleRShow = () => setRShow(true);
@@ -53,10 +53,10 @@ export default function StartGameButton (props) {
     }
   };
 
-  const stopGame = async() => {
+  const stopGame = async () => {
     console.log('Stop Game Button Pressed');
 
-    // Fetch request 
+    // Fetch request
     const response = await fetch(url + `/admin/quiz/${quizId}/end`, {
       method: 'POST',
       headers: { accept: 'application/json', Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
@@ -72,12 +72,12 @@ export default function StartGameButton (props) {
     }
   }
 
-  const toAdminGame = async() => {
+  const toAdminGame = async () => {
     // Switch Routes
-      navigate(`/admin/game/${quizId}`, {
-        token: token,
-        quizId: quizId
-      });
+    navigate(`/admin/game/${quizId}`, {
+      token,
+      quizId
+    });
   }
 
   return (
