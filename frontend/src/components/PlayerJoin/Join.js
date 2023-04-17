@@ -13,7 +13,6 @@ import ErrorPopup from '../General/ErrorPopup';
 
 const BACKEND_PORT = data.BACKEND_PORT;
 const url = `http://localhost:${BACKEND_PORT}`;
-let playerId;
 
 export default function Join () {
   const [name, setName] = useState('');
@@ -54,11 +53,12 @@ export default function Join () {
       setJoinError(true);
       setErrorMessage('Invalid Session ID');
     } else {
-      console.log('Log in data ', data);
-      playerId = data.playerId;
+      console.log('Joining data ', data);
       navigate(`/join/lobby/${sessionId}`, {
-        playerId: data.playerID,
-        sessionId,
+        state: {
+          playerId: data.playerId,
+          sessionId,
+        }
       });
     }
   }
@@ -83,5 +83,3 @@ export default function Join () {
       </>
   );
 }
-
-export { playerId };

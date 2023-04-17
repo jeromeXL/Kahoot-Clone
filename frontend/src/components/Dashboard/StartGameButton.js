@@ -6,6 +6,7 @@ import data from '../../config.json';
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { useMediaQuery } from 'react-responsive'
 
 const BACKEND_PORT = data.BACKEND_PORT;
 const url = `http://localhost:${BACKEND_PORT}`;
@@ -80,6 +81,21 @@ export default function StartGameButton (props) {
     });
   }
 
+  let width;
+  let iconSquare;
+  const isSmallScreen = useMediaQuery({ query: '(max-width: 500px)' });
+  const isMediumScreen = useMediaQuery({ query: '(max-width: 800px)' });
+  if (isSmallScreen) {
+    width = '70px';
+    iconSquare = '17';
+  } else if (isMediumScreen) {
+    width = '100px';
+    iconSquare = '20';
+  } else {
+    width = '125px';
+    iconSquare = '25';
+  }
+
   return (
     <>
     <Modal show={show} onHide={handleClose}>
@@ -112,18 +128,18 @@ export default function StartGameButton (props) {
     </Modal>
     <div>
       { onBefore
-        ? <Button type="button" style={{ backgroundColor: '#d9534f', borderColor: '#d9534f', color: 'white', width: '125px', }}
+        ? <Button type="button" style={{ backgroundColor: '#d9534f', borderColor: '#d9534f', color: 'white', width, }}
             onClick={stopGame} className="p-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-stop-fill" viewBox="0 0 16 16"
+            <svg xmlns="http://www.w3.org/2000/svg" width={iconSquare} height={iconSquare} fill="currentColor" className="bi bi-stop-fill" viewBox="0 0 16 16"
               style={{ margin: '-5px' }}>
               <path d="M5 3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3z" />
             </svg>
           </Button>
         : <Button
-            type="button" style={{ backgroundColor: '#139860', borderColor: '#139860', color: 'white', width: '125px', }}
+            type="button" style={{ backgroundColor: '#139860', borderColor: '#139860', color: 'white', width, }}
             onClick={startGame} className="p-2">
             <svg
-              xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-play-fill" viewBox="0 0 16 16"
+              xmlns="http://www.w3.org/2000/svg" width={iconSquare} height={iconSquare} fill="currentColor" className="bi bi-play-fill" viewBox="0 0 16 16"
               style={{ margin: '-5px' }}
             >
               <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z" />

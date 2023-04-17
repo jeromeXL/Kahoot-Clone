@@ -51,30 +51,6 @@ export default function Login () {
     }
 
     // Fetch request
-    // fetch(url + '/admin/auth/login', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ email, password })
-    // }).then((response) => {
-    //   if (!response.ok) {
-    //     console.log('response error!!!!');
-    //     setLoginError(true);
-    //     setErrorMessage('Invalid username or password');
-    //   }
-    //   return response.json();
-    // }).then((data) => {
-    //   console.log('Log in data ', data);
-    //   if (data.token) {
-    //     console.log('token is valid');
-    //     navigate('/dashboard', {
-    //       state: {
-    //         token: data.token,
-    //       }
-    //     });
-    //   }
-    // }).catch((err) => {
-    //   console.log(`ERROR: ${err}`);
-    // });
     const response = await fetch(url + '/admin/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
