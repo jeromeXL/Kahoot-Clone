@@ -10,6 +10,7 @@ import GameButtonContainer from './GameButtonContainer';
 import GameDetailsContainer from './GameDetailsContainer';
 import GameThumbnail from './GameThumbnail';
 import GameTextDetailContainer from './GameTextDetailContainer';
+import { useMediaQuery } from 'react-responsive';
 
 const BACKEND_PORT = data.BACKEND_PORT;
 const url = `http://localhost:${BACKEND_PORT}`;
@@ -62,13 +63,51 @@ export default function GameInDashBoard (props) {
     calcualteTime();
   }, [questions]);
 
+  const calcTimeSincePosted = (createdAt) => {
+    // Calculate the difference between today and createdAt
+    const today = new Date();
+    // console.log(today);
+    const created = new Date(createdAt);
+    // console.log(created);
+    const daysBetween = (today - created) / (1000 * 60 * 60 * 24);
+    let postedAgo;
+    if (daysBetween <= 1) {
+      const hours = Math.floor((today - created) / (1000 * 60 * 60));
+      const min = Math.floor(((today - created) / (1000 * 60)) % 60);
+      if (hours === 0 && min === 0) {
+        postedAgo = 'Created less than a minute ago';
+      } else if (hours === 0) {
+        postedAgo = `Created ${min} minutes ago`;
+      } else {
+        postedAgo = `Created ${hours} hours and ${min} min ago`;
+      }
+    } else {
+      postedAgo = `Created on ${createdAt.substring(0, 10)}`;
+    }
+    return postedAgo;
+  }
+
+  let width;
+  let margin;
+  const isSmallScreen = useMediaQuery({ query: '(max-width: 500px)' });
+  const isMediumScreen = useMediaQuery({ query: '(max-width: 800px)' });
+  if (isSmallScreen) {
+    width = '300px';
+    margin = '20px 0px';
+  } else if (isMediumScreen) {
+    width = '400px';
+    margin = '30px 0px';
+  } else {
+    width = '500px'
+    margin = '50px 15px';
+  }
   return (
-    <div style={{ backgroundColor: '#D9D9D9', width: '500px', borderRadius: '9px', margin: '50px 0px' }}>
+    <div style={{ backgroundColor: '#D9D9D9', width, borderRadius: '9px', margin }}>
       <GameDetailsContainer>
         <GameThumbnail img={quizData.thumbnail} id={quizId}/>
         <GameTextDetailContainer>
           <GameTitle>{quizData.name}</GameTitle>
-          <CreatedAtText>{quizData.createdAt}</CreatedAtText>
+          <CreatedAtText>{quizData.createdAt ? calcTimeSincePosted(quizData.createdAt) : ''}</CreatedAtText>
           <GameText>{questions.length} questions</GameText>
           <GameText>{min} min {sec} sec</GameText>
         </GameTextDetailContainer>

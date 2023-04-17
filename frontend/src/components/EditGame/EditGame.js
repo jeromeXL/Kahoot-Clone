@@ -8,6 +8,7 @@ import data from '../../config.json';
 import SaveGameChanges from './SaveGameChanges';
 import { fileToDataUrl } from '../helper';
 import Feedback from '../General/Feedback';
+import { useMediaQuery } from 'react-responsive'
 
 const BACKEND_PORT = data.BACKEND_PORT;
 const url = `http://localhost:${BACKEND_PORT}`;
@@ -92,11 +93,20 @@ export default function EditGame () {
     console.log(questions);
   }, [questions]);
 
+  let margin;
+  const isSmallScreen = useMediaQuery({ query: '(max-width: 500px)' });
+  const isMediumScreen = useMediaQuery({ query: '(max-width: 800px)' });
+  if (isSmallScreen || isMediumScreen) {
+    margin = '0px 10px';
+  } else {
+    margin = '0px 20px';
+  }
+
   return (
     <QuestionsContext.Provider value={{ questions, data, id: params.id, token, update: fetchQuizData }}>
     <EditGameHeader token={token}/>
     <h2 className='p-3'> Game Details </h2>
-    <div className='d-flex justify-content-between align-items-start p-2' style={{ margin: '0px 20px' }}>
+    <div className='d-flex justify-content-between align-items-start p-2 flex-wrap' style={{ margin }}>
       <div>
         <Form.Label>Game Name:</Form.Label>
         <Form.Control style={{ maxWidth: '500px', minWidth: '300px' }}
@@ -118,13 +128,12 @@ export default function EditGame () {
         : <></>
       }
     </div>
-    {/* UseContext here */}
     <div className='p-2'>
       <SaveGameChanges id={params.id} name={name} thumbnail={img} questions={questions} token={token} {...(valid === false) ? { disabled: 'success' } : { }}/>
     </div>
     <hr/>
-    <div className='d-flex justify-content-between align-items-center p-2'>
-      <h2>Questions - <i>{Math.floor(time / 60)} min {time % 60} sec</i> - <i>{points} points</i></h2>
+    <div className='d-flex justify-content-between align-items-center p-2 flex-wrap'>
+      <h2 style={{ padding: '5px' }}>Questions - <i>{Math.floor(time / 60)} min {time % 60} sec</i> - <i>{points} points</i></h2>
       <AddQuestionButton update={fetchQuizData}/>
     </div>
     <div>
