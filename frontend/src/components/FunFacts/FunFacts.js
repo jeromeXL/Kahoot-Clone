@@ -1,7 +1,8 @@
 import React from 'react';
+let facts;
 
 export default function FunFacts () {
-  const facts = [
+  facts = [
     'If you shuffle a deck of cards properly, chances are that the exact sequence of cards you just shuffled has never been seen before in the history of the world.',
     'The first computer mouse was made of wood.',
     'There are more possible iterations of a game of chess than there are atoms in the observable universe.',
@@ -23,9 +24,11 @@ export default function FunFacts () {
   const randomFact = facts[Math.floor(Math.random() * facts.length)];
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} data-testid='FunFacts-element'>
       <h2>Fun Fact:</h2>
       <p style={{ textAlign: 'center' }}>{randomFact}</p>
     </div>
   );
 }
+
+export { facts };
