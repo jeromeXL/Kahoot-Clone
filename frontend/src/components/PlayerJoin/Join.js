@@ -30,7 +30,7 @@ export default function Join () {
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
-  const joinGame = () => {
+  const joinGame = async () => {
     console.log(`Joining game: ${sessionId}. Name: ${name}`);
     setJoinError(false);
 
@@ -42,27 +42,25 @@ export default function Join () {
     }
 
     // Fetch request
-    fetch(url + `/play/join/${sessionId}`, {
+    const response = await fetch(url + `/play/join/${sessionId}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name })
-    }).then((response) => {
-      if (!response.ok) {
-        console.log('response error!!!!');
-        setJoinError(true);
-        setErrorMessage('Invalid Session ID');
-      }
-      return response.json();
-    }).then((data) => {
+    })
+
+    const data = await response.json();
+    if (data.error) {
+      console.log(`ERROR: ${data.error}`);
+      setJoinError(true);
+      setErrorMessage('Invalid Session ID');
+    } else {
       console.log('Log in data ', data);
       playerId = data.playerId;
       navigate(`/join/lobby/${sessionId}`, {
         playerId: data.playerID,
         sessionId,
       });
-    }).catch((err) => {
-      console.log(`ERROR: ${err}`);
-    });
+    }
   }
 
   return (
