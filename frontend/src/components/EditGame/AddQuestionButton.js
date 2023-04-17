@@ -200,9 +200,17 @@ export default function AddQuestionButton (props) {
       // If there are no errors
       handleClose();
       handleShowToast();
-      // Reload the dashboard to show new job
+      // Reset form.
+      resetForm();
+      // Reload to show new question
       props.update();
     }
+  }
+
+  const resetForm = () => {
+    setCorrect([false, false]);
+    setOptions(['', '']);
+    setMulti(false);
   }
 
   return (
@@ -260,13 +268,7 @@ export default function AddQuestionButton (props) {
           </div>
       </Modal.Body>
       <Modal.Footer>
-        {/* <Button variant="secondary" onClick={handleClose}>
-          Cancel
-        </Button> */}
         <SmallSubmitButton onClick={handleClose} color='#AC0000'> Cancel </SmallSubmitButton>
-        {/* <Button variant="primary" onClick={submit}>
-          Create question
-        </Button> */}
         <SmallSubmitButton onClick={submit} color='#017BFE'> Create question </SmallSubmitButton>
       </Modal.Footer>
     </Modal>

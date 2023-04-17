@@ -13,6 +13,10 @@ import MultiChoiceToggle from '../EditGame/MultiChoiceToggle';
 import AddOptionButton from '../EditGame/AddOptionButton';
 import DeleteOptionButton from '../EditGame/DeleteOptionButton';
 import SmallSubmitButton from '../General/SmallSubmitButton'
+import QuestionContainer from '../Question/QuestionContainer';
+import QuestionHeaderContainer from '../Question/QuestionHeaderContainer';
+import TitleContainer from '../Question/TitleContainer';
+import PointTimeContainer from '../Question/PointTimeContainer';
 
 const BACKEND_PORT = data.BACKEND_PORT;
 const url = `http://localhost:${BACKEND_PORT}`;
@@ -208,16 +212,16 @@ export default function EditableQuestion (props) {
   }
 
   return (
-    <div style={{ width: '800px', backgroundColor: '#AAB8D4', margin: '20px auto', padding: '20px' }}>
-      <div className='d-flex justify-content-start align-items-center p-2'>
-        <h3 className='p-2 flex-grow-1'>
+    <QuestionContainer>
+      <QuestionHeaderContainer>
+        <TitleContainer>
           <Form.Control defaultValue={title} onChange={changeTitle}/>
-        </h3>
-        <h4 className='p-2'>
+        </TitleContainer>
+        <PointTimeContainer>
           <EditPointsInput defaultValue={points} onChange={changePoints}/>
           <EditTimeInput defaultValue={time} onChange={changeTime}/>
-        </h4>
-      </div>
+        </PointTimeContainer>
+      </QuestionHeaderContainer>
       <hr/>
       <div className='p-2'>
         <h3>Links/Images</h3>
@@ -256,11 +260,9 @@ export default function EditableQuestion (props) {
         </Form>
       </div>
       <div className='d-flex justify-content-between align-items-center p-2'>
-        {/* <Button onClick={back}> Cancel </Button> */}
         <SmallSubmitButton onClick={back} color='#AC0000'> Cancel </SmallSubmitButton>
-        {/* <Button onClick={submit}> Save Changes </Button> */}
         <SmallSubmitButton onClick={submit} color='#017BFE'> Save Changes </SmallSubmitButton>
       </div>
-    </div>
+    </QuestionContainer>
   );
 }

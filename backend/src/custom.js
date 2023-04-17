@@ -11,9 +11,8 @@ export const quizQuestionPublicReturn = question => {
     const key = Object.keys(obj)[0];
     options.push(key);
   }
-  const PublicQuestion = {title : question.title, options, points : question.points, 
-  link : question.link, image : question.image, time: time }
-  return PublicQuestion;
+  const publicQuestion = {title : question.title, options, points : question.points, link : question.link, image : question.image, time: time}
+  return publicQuestion;
 };
 
 /*
@@ -21,7 +20,7 @@ export const quizQuestionPublicReturn = question => {
  the correct answers (minimum 1).
 */
 export const quizQuestionGetCorrectAnswers = question => {
-  const correct = []
+  const correct = [];
   for (let i = 0; i < question.options.length; i++) {
     const obj = question.options[i];
     const key = Object.keys(obj)[0];
