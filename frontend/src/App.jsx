@@ -18,6 +18,7 @@ import EditQuestion from './components/EditQuestion/EditQuestion.js';
 import Lobby from './components/PlayerJoin/Lobby.js';
 import InGameScreenPlayer from './components/Game/InGameScreenPlayer.js';
 import InGameScreenAdmin from './components/Game/InGameScreenAdmin.js';
+import ResultsScreenAdmin from './components/Game/ResultsScreenAdmin.js';
 
 function App () {
   console.log("Let's go!")
@@ -36,6 +37,7 @@ function App () {
           <Route path="/join/lobby/:id" element={<Lobby/>} />
           <Route path="/join/game/:id" element={<InGameScreenPlayer/>} />
           <Route path="/admin/game/:id" element={<InGameScreenAdmin/>} />
+          <Route path="/admin/game/:id/results" element={<ResultsScreenAdmin/>}/>
         </Routes>
       </BrowserRouter>
     </>

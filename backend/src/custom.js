@@ -5,7 +5,15 @@
 */
 export const quizQuestionPublicReturn = question => {
   console.log('See question: ', question);
-  return question;
+  const options = [];
+  for (let i = 0; i < question.options.length; i++) {
+    const obj = question.options[i];
+    const key = Object.keys(obj)[0];
+    options.push(key);
+  }
+  const PublicQuestion = {title : question.title, options, points : question.points, 
+  link : question.link, image : question.image, time: time }
+  return PublicQuestion;
 };
 
 /*
@@ -13,9 +21,15 @@ export const quizQuestionPublicReturn = question => {
  the correct answers (minimum 1).
 */
 export const quizQuestionGetCorrectAnswers = question => {
-  return [
-    123,
-  ]; // For a single answer
+  const correct = []
+  for (let i = 0; i < question.options.length; i++) {
+    const obj = question.options[i];
+    const key = Object.keys(obj)[0];
+    if (obj[key] === true) {
+      correct.push(i);
+    }
+  }
+  return correct;
 };
 
 /*
@@ -23,11 +37,7 @@ export const quizQuestionGetCorrectAnswers = question => {
  all of the answers, correct or incorrect.
 */
 export const quizQuestionGetAnswers = question => {
-  return [
-    123,
-    456,
-    678,
-  ]; // For a single answer
+  return [...Array(question.option.length).keys()]
 };
 
 /*
@@ -35,5 +45,5 @@ export const quizQuestionGetAnswers = question => {
  of the question once it starts. (Seconds)
 */
 export const quizQuestionGetDuration = question => {
-  return 10;
+  return question.time;
 };

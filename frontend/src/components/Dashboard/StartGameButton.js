@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal'
@@ -6,6 +6,7 @@ import data from '../../config.json';
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import StopGameButton from './StopGameButton';
 
 const BACKEND_PORT = data.BACKEND_PORT;
 const url = `http://localhost:${BACKEND_PORT}`;
@@ -25,14 +26,37 @@ export default function StartGameButton (props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  // Results modal 
+  // Results modal
   const [RShow, setRShow] = useState(false);
   const handleRClose = () => setRShow(false);
   const handleRShow = () => setRShow(true);
 
-  const [onBefore, setOnBefore] = useState(false);
+  const [onBefore, setOnBefore] = useState(() => {
+    const storedOnBefore = localStorage.getItem(`onBefore_${quizId}`);
+    return storedOnBefore !== null ? JSON.parse(storedOnBefore) : false;
+  });
 
-  const link = `${url}/join/game/${quizId}`;
+  const [sessionId, setSessionId] = useState(null);
+  const [link, setLink] = useState('');
+
+  useEffect(() => {
+    const checkOnBefore = async () => {
+      const response = await fetch(url + `admin/quiz/?quizId=${quizId}`, {
+        method: 'GET',
+        headers: { accept: 'application/json', Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
+      });
+      const data = await response.json();
+      if (data.active === null && data.oldSessions.length === 0) {
+        setOnBefore(false);
+        localStorage.setItem(`onBefore_${quizId}`, false);
+      } else if (data.active !== null) {
+        setOnBefore(true);
+        localStorage.setItem(`onBefore_${quizId}`, true);
+      }
+    };
+
+    checkOnBefore();
+  }, []);
 
   const startGame = async () => {
     console.log('Start Game Button Pressed');
@@ -48,43 +72,45 @@ export default function StartGameButton (props) {
     if (data.error) {
       console.log(`ERROR: ${data.error}`);
     } else {
+      // Fetch Request to get SessionID
+      console.log('Fetching Session ID');
+      const response = await fetch(url + `/admin/quiz?quizId=${quizId}`, {
+        method: 'GET',
+        headers: { accept: 'application/json', Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      })
+      const data = await response.json();
+      if (data.error) {
+        console.log(`ERROR: ${data.error}`);
+      }
+      console.log(data);
+      setSessionId(data.quizzes[0].active);
+      setLink(`${url}/join/game/${data.quizzes[0].active}`);
       handleShow();
       setOnBefore(true);
     }
   };
 
-  const stopGame = async() => {
-    console.log('Stop Game Button Pressed');
-
-    // Fetch request 
-    const response = await fetch(url + `/admin/quiz/${quizId}/end`, {
-      method: 'POST',
-      headers: { accept: 'application/json', Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ quizid: quizId })
-    })
-
-    const data = await response.json();
-    if (data.error) {
-      console.log(`ERROR: ${data.error}`);
-    } else {
-      setOnBefore(true);
-      handleRShow();
-    }
+  const toAdminGame = async () => {
+    // Switch Routes
+    navigate(`/admin/game/${quizId}`, {
+      token: token,
+      quizId: quizId
+    });
   }
 
-  const toAdminGame = async() => {
+  const toAdminResults = async () => {
     // Switch Routes
-      navigate(`/admin/game/${quizId}`, {
-        token: token,
-        quizId: quizId
-      });
+    navigate(`/admin/game/${quizId}/results`, {
+      token: token,
+      quizId: quizId
+    });
   }
 
   return (
     <>
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Session ID: {quizId} </Modal.Title>
+        <Modal.Title>Session ID: {sessionId} </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <h5> {link} </h5>
@@ -107,18 +133,12 @@ export default function StartGameButton (props) {
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleRClose}>No</Button>
-        <Button variant="primary">Yes</Button>
+        <Button variant="primary" onClick={() => toAdminResults()}>Yes</Button>
         </Modal.Footer>
     </Modal>
     <div>
       { onBefore
-        ? <Button type="button" style={{ backgroundColor: '#d9534f', borderColor: '#d9534f', color: 'white', width: '125px', }}
-            onClick={stopGame} className="p-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-stop-fill" viewBox="0 0 16 16"
-              style={{ margin: '-5px' }}>
-              <path d="M5 3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3z" />
-            </svg>
-          </Button>
+        ? <StopGameButton token={token} quizId={quizId} handleRShow={handleRShow} setOnBefore={setOnBefore}></StopGameButton>
         : <Button
             type="button" style={{ backgroundColor: '#139860', borderColor: '#139860', color: 'white', width: '125px', }}
             onClick={startGame} className="p-2">
