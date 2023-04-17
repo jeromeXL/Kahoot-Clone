@@ -5,8 +5,6 @@ import {
   Route
 } from 'react-router-dom';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 import Login from './components/Auth/Login.js';
 import Signup from './components/Auth/Signup.js';
 import Join from './components/PlayerJoin/Join.js';

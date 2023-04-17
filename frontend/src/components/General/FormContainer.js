@@ -1,5 +1,4 @@
 import React from 'react';
-import '@fontsource/inter';
 
 export default function FormContainer (props) {
   return (

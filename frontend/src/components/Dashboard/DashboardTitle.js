@@ -1,5 +1,5 @@
 import React from 'react';
-import '@fontsource/inter';
+// import '@fontsource/inter';
 
 export default function DashboardTitle (props) {
   return (
