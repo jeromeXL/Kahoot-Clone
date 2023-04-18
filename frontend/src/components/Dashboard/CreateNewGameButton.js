@@ -57,7 +57,7 @@ export default function CreateNewGameButton (props) {
   return (
     <>
     <HeaderButton name='CreateNewGameButton' onClick={handleShow}>
-      +
+      Create New Quiz
     </HeaderButton>
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>

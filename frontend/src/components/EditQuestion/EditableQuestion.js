@@ -250,10 +250,10 @@ export default function EditableQuestion (props) {
           <div className='d-flex justify-content-start align-items-center p-2' key={index}>
             <Form.Check
               type={multi === true ? 'checkbox' : 'radio'}
-              {...(correct[index] === true) ? { defaultChecked: 'success' } : { }} inline aria-label={option} name='options' onChange={() => changeCorrect(index, multi === true)}
+              {...(correct[index] === true) ? { defaultChecked: 'success' } : { }} inline aria-label={`${multi === true ? 'checkbox' : 'radio'} for ${option}`} name='options' onChange={() => changeCorrect(index, multi === true)}
             />
             <Form.Control onChange={(e) => changeOption(e, index)}
-              defaultValue={option}
+              defaultValue={option} aria-label={option}
             />
           </div>
         ))}

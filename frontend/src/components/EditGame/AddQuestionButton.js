@@ -215,7 +215,7 @@ export default function AddQuestionButton (props) {
 
   return (
     <>
-    <Button data-cy='AddQuestionButton' onClick={handleShow}>
+    <Button aria-label='Add Question Button' data-cy='AddQuestionButton' onClick={handleShow}>
       Add new Question
     </Button>
     <Modal show={show} onHide={handleClose}>
@@ -253,10 +253,10 @@ export default function AddQuestionButton (props) {
               <div className='d-flex justify-content-start align-items-center p-2' key={index}>
                 <Form.Check
                   type={multi === true ? 'checkbox' : 'radio'}
-                  {...(correct[index] === true) ? { defaultChecked: 'success' } : { }} inline aria-label={option} name='options' onChange={() => changeCorrect(index, multi === true)}
+                  {...(correct[index] === true) ? { defaultChecked: 'success' } : { }} inline aria-label={`${multi === true ? 'checkbox' : 'radio'} for ${option}`} name='options' onChange={() => changeCorrect(index, multi === true)}
                 />
                 <Form.Control type='text' onChange={(e) => changeOption(e, index)}
-                  defaultValue={option} required
+                  defaultValue={option} required aria-label={option}
                 />
               </div>
             ))}

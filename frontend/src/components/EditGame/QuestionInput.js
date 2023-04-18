@@ -5,7 +5,7 @@ export default function QuestionInput (props) {
   return (
     <>
       <Form.Label>Question</Form.Label>
-      <Form.Control data-cy='NewQuestionInput' type="text" placeholder="Enter a question" required onChange={props.onChange} />
+      <Form.Control data-cy='NewQuestionInput' aria-label='NewQuestionInput' type="text" placeholder="Enter a question" required onChange={props.onChange} />
     </>
   );
 }

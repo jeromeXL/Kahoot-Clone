@@ -43,7 +43,7 @@ export default function DeleteQuestionButton (props) {
   }
   return (
     <>
-      <SmallSubmitButton color='#AC0000' onClick={handleShow}> Delete question </SmallSubmitButton>
+      <SmallSubmitButton aria-label='Delete Question Button' color='#AC0000' onClick={handleShow}> Delete question </SmallSubmitButton>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
