@@ -5,7 +5,7 @@ export default function TimeInput (props) {
   return (
     <>
       <Form.Label>Time Limit</Form.Label>
-      <Form.Control type="number" placeholder="Enter question time limit" required onChange={props.onChange} />
+      <Form.Control data-cy='NewTimeInput' type="number" placeholder="Enter question time limit" required onChange={props.onChange} />
     </>
   );
 }

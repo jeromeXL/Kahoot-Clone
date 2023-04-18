@@ -78,15 +78,15 @@ export default function Login () {
           {loginError && <ErrorPopup message={errorMessage} />}
           <FormContainer color="#AAB8D4">
             <Form>
-              <FloatingInput type="text" controlId="formBasicEmail" labelControlId="floatingInput" label="Email Address" placeholder="Enter email" onChange={emailChange}/>
-              <FloatingInput type="password" controlId="formBasicPassword" labelControlId="floatingPassword" label="Password" placeholder="Enter password" onChange={passwordChange}/>
-              <SubmitButton onClick={LoginPress} color="#475A81">
+              <FloatingInput name='LogInEmail' type="text" controlId="formBasicEmail" labelControlId="floatingInput" label="Email Address" placeholder="Enter email" onChange={emailChange}/>
+              <FloatingInput name='LogInPassword' type="password" controlId="formBasicPassword" labelControlId="floatingPassword" label="Password" placeholder="Enter password" onChange={passwordChange}/>
+              <SubmitButton name='LogInButton' onClick={LoginPress} color="#475A81">
                 Log In
               </SubmitButton>
             </Form>
           </FormContainer>
-          <LinkToPage text="Don't have an account? " page="../signup" linkText="Sign up!" color='white'/>
-          <LinkToPage text="Want to join a game as a player? " page="../join" linkText="Click here!" color='white'/>
+          <LinkToPage name='AdminToSignUp' text="Don't have an account? " page="../signup" linkText="Sign up!" color='white'/>
+          <LinkToPage name='AdminLoginToPlayer' text="Want to join a game as a player? " page="../join" linkText="Click here!" color='white'/>
         </Centre>
       </>
   );

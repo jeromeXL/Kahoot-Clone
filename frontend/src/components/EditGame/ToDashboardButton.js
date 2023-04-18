@@ -13,6 +13,6 @@ export default function ToDashboardButton (props) {
     });
   };
   return (
-    <HeaderButton onClick={toDashboard}>Back</HeaderButton>
+    <HeaderButton name='EditGameToDashboard' onClick={toDashboard}>Back</HeaderButton>
   );
 }

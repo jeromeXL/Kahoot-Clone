@@ -110,17 +110,17 @@ export default function Signup () {
         {signupError && <ErrorPopup message={errorMessage} />}
         <FormContainer color="#AAB8D4">
           <Form>
-            <FloatingInput type="text" controlId="formBasicEmail" labelControlId="floatingEmail" label="Email Address" placeholder="Enter email" onChange={emailChange}/>
-            <FloatingInput type="text" controlId="formBasicName" labelControlId="floatingName" label="Name" placeholder="Enter name" onChange={nameChange}/>
-            <FloatingInput type="password" controlId="formBasicPassword" labelControlId="floatingPassword" label="Password" placeholder="Enter password" onChange={passwordChange}/>
-            <FloatingInput type="password" controlId="formBasicConfirmPassword" labelControlId="floatingConfirmPassword" label="Confirm password" placeholder="Confirm password" onChange={passwordConfirmChange}/>
-            <SubmitButton onClick={SignUpPress} color="#6178A8">
+            <FloatingInput name='SignUpEmail' type="text" controlId="formBasicEmail" labelControlId="floatingEmail" label="Email Address" placeholder="Enter email" onChange={emailChange}/>
+            <FloatingInput name='SignUpName' type="text" controlId="formBasicName" labelControlId="floatingName" label="Name" placeholder="Enter name" onChange={nameChange}/>
+            <FloatingInput name='SignUpPW1' type="password" controlId="formBasicPassword" labelControlId="floatingPassword" label="Password" placeholder="Enter password" onChange={passwordChange}/>
+            <FloatingInput name='SignUpPW2' type="password" controlId="formBasicConfirmPassword" labelControlId="floatingConfirmPassword" label="Confirm password" placeholder="Confirm password" onChange={passwordConfirmChange}/>
+            <SubmitButton name='SignUpButton' onClick={SignUpPress} color="#6178A8">
               Sign Up
             </SubmitButton>
           </Form>
         </FormContainer>
-        <LinkToPage text="Already have an account? " page="../login" linkText="Log In!"/>
-        <LinkToPage text="Want to join as a player? " page="../join" linkText="Click here!"/>
+        <LinkToPage name='AdminToLogin' text="Already have an account? " page="../login" linkText="Log In!"/>
+        <LinkToPage name='AdminSignUpToPlayer' text="Want to join as a player? " page="../join" linkText="Click here!"/>
       </Centre>
     </>
   );

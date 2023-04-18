@@ -56,7 +56,7 @@ export default function CreateNewGameButton (props) {
 
   return (
     <>
-    <HeaderButton onClick={handleShow}>
+    <HeaderButton name='CreateNewGameButton' onClick={handleShow}>
       +
     </HeaderButton>
     <Modal show={show} onHide={handleClose}>
@@ -67,15 +67,15 @@ export default function CreateNewGameButton (props) {
       <Modal.Body>
           <Form.Group className="mb-3" controlId="formQuizName">
             <Form.Label>Quiz Name</Form.Label>
-            <Form.Control type="text" placeholder="Enter quiz name" required onChange={quizNameChange} />
+            <Form.Control name='NewQuizNameInput' type="text" placeholder="Enter quiz name" required onChange={quizNameChange} />
             <Form.Control.Feedback type="invalid"> Please choose a valid quiz name. </Form.Control.Feedback>
           </Form.Group>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
+        <Button name='CancelCreateNewQuiz' variant="secondary" onClick={handleClose}>
             Cancel
           </Button>
-          <Button type="submit" variant="primary">
+          <Button name='ConfirmCreateNewQuiz' type="submit" variant="primary">
             Create Quiz
           </Button>
         </Modal.Footer>

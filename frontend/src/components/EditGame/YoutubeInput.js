@@ -5,7 +5,7 @@ export default function YoutubeInput (props) {
   return (
     <>
       <Form.Label>Enter Youtube URL</Form.Label>
-      <Form.Control {...props}/>
+      <Form.Control data-cy='YoutubeInput' {...props}/>
     </>
   );
 }
