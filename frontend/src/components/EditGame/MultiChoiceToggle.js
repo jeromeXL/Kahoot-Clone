@@ -7,6 +7,7 @@ export default function MultiChoiceToggle (props) {
       type="switch"
       label="multiple correct answers"
       className="mb-3"
+      aria-label='single or multi answer switch'
       {...props}
     />
   );

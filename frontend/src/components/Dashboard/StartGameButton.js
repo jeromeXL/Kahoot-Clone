@@ -68,7 +68,7 @@ export default function StartGameButton (props) {
     if (data.error) {
       console.log(`ERROR: ${data.error}`);
     } else {
-      setOnBefore(true);
+      setOnBefore(false);
       handleRShow();
     }
   }
@@ -98,7 +98,7 @@ export default function StartGameButton (props) {
 
   return (
     <>
-    <Modal show={show} onHide={handleClose}>
+    <Modal name='StartGameModal' show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Session ID: {quizId} </Modal.Title>
       </Modal.Header>
@@ -114,7 +114,7 @@ export default function StartGameButton (props) {
           </CopyToClipboard>
         </Modal.Footer>
     </Modal>
-    <Modal show={RShow} onHide={handleRClose}>
+    <Modal name='StopGameModal' show={RShow} onHide={handleRClose}>
       <Modal.Header closeButton>
         <Modal.Title>Game Stopped!</Modal.Title>
       </Modal.Header>
@@ -122,13 +122,13 @@ export default function StartGameButton (props) {
         Would you like to view results?
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleRClose}>No</Button>
-        <Button variant="primary">Yes</Button>
+        <Button aria-label='Back to Dashboard Button' variant="secondary" onClick={handleRClose}>No</Button>
+        <Button aria-label='View Results Button' name='ToResultsPage' variant="primary">Yes</Button>
         </Modal.Footer>
     </Modal>
     <div>
       { onBefore
-        ? <Button type="button" style={{ backgroundColor: '#d9534f', borderColor: '#d9534f', color: 'white', width, }}
+        ? <Button type="button" aria-label='Stop Game Button' name='StopGameButton' style={{ backgroundColor: '#d9534f', borderColor: '#d9534f', color: 'white', width, }}
             onClick={stopGame} className="p-2">
             <svg xmlns="http://www.w3.org/2000/svg" width={iconSquare} height={iconSquare} fill="currentColor" className="bi bi-stop-fill" viewBox="0 0 16 16"
               style={{ margin: '-5px' }}>
@@ -136,7 +136,7 @@ export default function StartGameButton (props) {
             </svg>
           </Button>
         : <Button
-            type="button" style={{ backgroundColor: '#139860', borderColor: '#139860', color: 'white', width, }}
+            type="button" aria-label='Start Game Button' name='StartGameButton' style={{ backgroundColor: '#139860', borderColor: '#139860', color: 'white', width, }}
             onClick={startGame} className="p-2">
             <svg
               xmlns="http://www.w3.org/2000/svg" width={iconSquare} height={iconSquare} fill="currentColor" className="bi bi-play-fill" viewBox="0 0 16 16"

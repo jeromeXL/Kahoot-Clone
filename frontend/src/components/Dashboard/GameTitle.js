@@ -18,7 +18,7 @@ export default function GameTitle (props) {
   }
 
   return (
-    <div style={{ color: 'black', fontSize: size, fontWeight: 'bold', marginLeft }}>
+    <div name='GameTitle' style={{ color: 'black', fontSize: size, fontWeight: 'bold', marginLeft }}>
       {props.children}
     </div>
   );

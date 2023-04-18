@@ -19,9 +19,10 @@ export default function SaveGameChanges (props) {
       console.log(`ERROR: ${data.error}`);
     } else {
       alert('Details successfully updated');
+      props.update();
     }
   }
   return (
-    <Button {...props} onClick={update}> Save Changes to Game Details </Button>
+    <Button data-cy='SaveGameChangesButton' {...props} onClick={update}> Save Changes to Game Details </Button>
   );
 }

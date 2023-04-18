@@ -18,6 +18,6 @@ export default function DashboardTitle (props) {
   }
 
   return (
-    <h1 style={{ fontFamily: 'Inter', color: '#FFFFFF', fontWeight: 'bolder', letterSpacing: spacing, fontSize: size }}> {props.children} </h1>
+    <h1 data-cy="HeaderTitle" style={{ fontFamily: 'Inter', color: '#FFFFFF', fontWeight: 'bolder', letterSpacing: spacing, fontSize: size }}> {props.children} </h1>
   );
 }

@@ -215,7 +215,7 @@ export default function AddQuestionButton (props) {
 
   return (
     <>
-    <Button onClick={handleShow}>
+    <Button aria-label='Add Question Button' data-cy='AddQuestionButton' onClick={handleShow}>
       Add new Question
     </Button>
     <Modal show={show} onHide={handleClose}>
@@ -248,15 +248,15 @@ export default function AddQuestionButton (props) {
             <MultiChoiceToggle {...(multi === true) ? { checked: 'success' } : { }} onChange={switchChange} />
           </div>
           <div>
-            <Form>
+            <Form data-cy='NewQuestionOptionsForm'>
             {options.map((option, index) => (
               <div className='d-flex justify-content-start align-items-center p-2' key={index}>
                 <Form.Check
                   type={multi === true ? 'checkbox' : 'radio'}
-                  {...(correct[index] === true) ? { defaultChecked: 'success' } : { }} inline aria-label={option} name='options' onChange={() => changeCorrect(index, multi === true)}
+                  {...(correct[index] === true) ? { defaultChecked: 'success' } : { }} inline aria-label={`${multi === true ? 'checkbox' : 'radio'} for ${option}`} name='options' onChange={() => changeCorrect(index, multi === true)}
                 />
-                <Form.Control onChange={(e) => changeOption(e, index)}
-                  defaultValue={option} required
+                <Form.Control type='text' onChange={(e) => changeOption(e, index)}
+                  defaultValue={option} required aria-label={option}
                 />
               </div>
             ))}
@@ -269,7 +269,7 @@ export default function AddQuestionButton (props) {
       </Modal.Body>
       <Modal.Footer>
         <SmallSubmitButton onClick={handleClose} color='#AC0000'> Cancel </SmallSubmitButton>
-        <SmallSubmitButton onClick={submit} color='#017BFE'> Create question </SmallSubmitButton>
+        <SmallSubmitButton data-cy='ConfirmCreateQuestion' onClick={submit} color='#017BFE'> Create question </SmallSubmitButton>
       </Modal.Footer>
     </Modal>
     <ToastContainer className="p-3" position='top-end'>
