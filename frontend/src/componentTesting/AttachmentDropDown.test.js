@@ -50,7 +50,7 @@ describe('AttachmentDropDown', () => {
     )
     expect(onChange).toHaveBeenCalledTimes(1);
   })
-  
+
   it('doesnt change selected option and onChange does not fire when it is disabled', () => {
     const onChange = jest.fn();
     render(<AttachmentDropDown disabled onChange={onChange}/>)
