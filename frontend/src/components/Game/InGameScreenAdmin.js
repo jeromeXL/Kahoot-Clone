@@ -91,12 +91,15 @@ export default function InGameScreenAdmin (props) {
     const data = await response.json();
     if (data.error) {
       console.log(`ERROR: ${data.error}`);
+    } else {
+      // Switch Routes
+      navigate(`/admin/game/${quizId}/results`, {
+        state: {
+          token,
+          quizId
+        }
+      });
     }
-    // Switch Routes
-    navigate(`/admin/game/${quizId}/results`, {
-      token,
-      quizId
-    });
   }
 
   return (
@@ -106,8 +109,8 @@ export default function InGameScreenAdmin (props) {
           ? <>
               <Title/>
               <Subtitle> Quiz </Subtitle>
+              <br/>
               <FormContainer color="#AAB8D4">
-                <>Press the start game button to start the game</>
                 <SubmitButton color="#475A81" onClick={nextQuestion}>Start Game</SubmitButton>
               </FormContainer>
             </>

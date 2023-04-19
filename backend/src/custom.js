@@ -4,14 +4,14 @@
  to return to a "player"
 */
 export const quizQuestionPublicReturn = question => {
-  console.log('See question: ', question);
   const options = [];
   for (let i = 0; i < question.options.length; i++) {
     const obj = question.options[i];
     const key = Object.keys(obj)[0];
     options.push(key);
   }
-  const publicQuestion = {title : question.title, options, points : question.points, link : question.link, image : question.image, time: time}
+  const publicQuestion = {title : question.title, options, points : question.points, link : question.link, image : question.image, time: question.time}
+  console.log(publicQuestion);
   return publicQuestion;
 };
 
