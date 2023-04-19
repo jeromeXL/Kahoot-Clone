@@ -63,7 +63,7 @@ export default function QuestionForPlayer (props) {
           {props.title}
         </TitleContainer>
         <PointTimeContainer>
-          {props.points} points
+          {props.points} points - {props.time}(s)
         </PointTimeContainer>
       </QuestionHeaderContainer>
       <hr/>
@@ -84,7 +84,7 @@ export default function QuestionForPlayer (props) {
           ? props.options.map((option, index) => (
           <div className='d-flex justify-content-start align-items-center p-2' key={index}>
             <Form.Check type='checkbox' inline aria-label={option} name='player-option' onChange={() => tickUntick(index)}/>
-            <Form.Control defaultValue={props.option} disabled readOnly/>
+            <Form.Control defaultValue={option} disabled readOnly/>
           </div>
           ))
           : <></>

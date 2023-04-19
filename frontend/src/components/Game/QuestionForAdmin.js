@@ -20,26 +20,23 @@ export default function QuestionForAdmin (props) {
         </PointTimeContainer>
       </QuestionHeaderContainer>
       <hr/>
-      <h3>Links/Images</h3>
-      {props.image && props.image !== null
-        ? <QuestionImage image={props.image} id={props.id}/>
-        : <></>
-      }
-      {props.link && props.link !== null
-        ? <Ratio aspectRatio={'16x9'}>
-          <ReactPlayer url={props.link} controls width='100%' height='100%'/>
-          </Ratio>
-        : <></>
-      }
-      {props.link === null && props.image === null
-        ? <>No image / link attached</>
-        : <></>
-      }
-      <hr/>
+      <div className='p-2'>
+        {props.image && props.image !== null
+          ? <QuestionImage image={props.image} id={props.id}/>
+          : <></>
+        }
+        {props.link && props.link !== null
+          ? <Ratio aspectRatio={'16x9'}>
+            <ReactPlayer url={props.link} controls width='100%' height='100%'/>
+            </Ratio>
+          : <></>
+        }
+        <hr/>
+      </div>
       <div>
         {props.options.map((option, index) => (
           <div className='d-flex justify-content-start align-items-center p-2' key={index}>
-            <h4>{index + 1}. {Object.keys(option)[0]} </h4>
+            <>{index + 1}. {Object.keys(option)[0]}</>
           </div>
         ))}
       </div>

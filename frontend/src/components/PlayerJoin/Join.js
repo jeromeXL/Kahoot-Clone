@@ -73,7 +73,7 @@ export default function Join () {
             <Form>
               <FloatingInput type="text" controlId="formName" labelControlId="floatingInput" label="Name" placeholder="Enter Name" onChange={nameChange}/>
               <FloatingInput type="text" controlId="formSessionID" labelControlId="floatingInput" label="Session ID" placeholder="Enter Session ID" onChange={sessionChange}/>
-              <SubmitButton onClick={joinGame} color="#005050">
+              <SubmitButton aria-label='Join Game Button' onClick={joinGame} color="#005050">
                 Join Game
               </SubmitButton>
             </Form>
