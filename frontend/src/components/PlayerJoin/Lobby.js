@@ -16,6 +16,7 @@ export default function Lobby () {
   const playerId = location.state.playerId;
   const sessionId = location.state.sessionId
   const navigate = useNavigate();
+
   // Fetch request to check if the game has started.
   const getStatus = async () => {
     console.log('Checking whether game has started...')

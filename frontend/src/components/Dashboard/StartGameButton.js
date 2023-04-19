@@ -1,4 +1,5 @@
 import { React, useState } from 'react';
+// import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal'
@@ -6,6 +7,7 @@ import data from '../../config.json';
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import StopGameButton from './StopGameButton';
 import { useMediaQuery } from 'react-responsive'
 
 const BACKEND_PORT = data.BACKEND_PORT;
@@ -33,7 +35,26 @@ export default function StartGameButton (props) {
 
   const [onBefore, setOnBefore] = useState(false);
 
-  const link = `${url}/join/game/${quizId}`;
+  const [sessionId, setSessionId] = useState(null);
+  const [link, setLink] = useState('');
+
+  /* Not Working
+  useEffect(() => {
+    const checkOnBefore = async () => {
+      const response = await fetch(url + `/admin/quiz/?quizId=${quizId}`, {
+        method: 'GET',
+        headers: { accept: 'application/json', Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
+      });
+      const data = await response.json();
+      if (data.active !== null || data.oldSessions.length !== 0) {
+        setOnBefore(true);
+      } else {
+        setOnBefore(false);
+      }
+    };
+    checkOnBefore();
+  }, []);
+  */
 
   const startGame = async () => {
     console.log('Start Game Button Pressed');
@@ -49,6 +70,19 @@ export default function StartGameButton (props) {
     if (data.error) {
       console.log(`ERROR: ${data.error}`);
     } else {
+      // Fetch Request to get SessionID
+      console.log('Fetching Session ID');
+      const response = await fetch(url + `/admin/quiz/${quizId}`, {
+        method: 'GET',
+        headers: { accept: 'application/json', Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      })
+      const data = await response.json();
+      if (data.error) {
+        console.log(`ERROR: ${data.error}`);
+      }
+      console.log(data);
+      setSessionId(data.active);
+      setLink(`http://localhost:3000/join/game/${data.active}`);
       handleShow();
       setOnBefore(true);
     }
@@ -76,11 +110,24 @@ export default function StartGameButton (props) {
   const toAdminGame = async () => {
     // Switch Routes
     navigate(`/admin/game/${quizId}`, {
-      token,
-      quizId
+      state: {
+        token,
+        quizId,
+        sessionId
+      }
     });
   }
 
+  const toAdminResults = async () => {
+    // Switch Routes
+    navigate(`/admin/game/${quizId}/results`, {
+      state: {
+        token,
+        quizId
+      }
+    });
+  }
+  console.log(stopGame);
   let width;
   let iconSquare;
   const isSmallScreen = useMediaQuery({ query: '(max-width: 500px)' });
@@ -100,7 +147,7 @@ export default function StartGameButton (props) {
     <>
     <Modal name='StartGameModal' show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Session ID: {quizId} </Modal.Title>
+        <Modal.Title>Session ID: {sessionId} </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <h5> {link} </h5>
@@ -122,19 +169,13 @@ export default function StartGameButton (props) {
         Would you like to view results?
       </Modal.Body>
       <Modal.Footer>
-        <Button aria-label='Back to Dashboard Button' variant="secondary" onClick={handleRClose}>No</Button>
-        <Button aria-label='View Results Button' name='ToResultsPage' variant="primary">Yes</Button>
+        <Button variant="secondary" aria-label='Back to Dashboard Button' onClick={handleRClose}>No</Button>
+        <Button variant="primary" aria-label='View Results Button' name='ToResultsPage' onClick={() => toAdminResults()}>Yes</Button>
         </Modal.Footer>
     </Modal>
     <div>
       { onBefore
-        ? <Button type="button" aria-label='Stop Game Button' name='StopGameButton' style={{ backgroundColor: '#d9534f', borderColor: '#d9534f', color: 'white', width, }}
-            onClick={stopGame} className="p-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width={iconSquare} height={iconSquare} fill="currentColor" className="bi bi-stop-fill" viewBox="0 0 16 16"
-              style={{ margin: '-5px' }}>
-              <path d="M5 3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3z" />
-            </svg>
-          </Button>
+        ? <StopGameButton token={token} quizId={quizId} handleRShow={handleRShow} setOnBefore={setOnBefore}></StopGameButton>
         : <Button
             type="button" aria-label='Start Game Button' name='StartGameButton' style={{ backgroundColor: '#139860', borderColor: '#139860', color: 'white', width, }}
             onClick={startGame} className="p-2">
