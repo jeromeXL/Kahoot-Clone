@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useEffect, useState } from 'react';
 let facts;
 
 export default function FunFacts () {
@@ -20,8 +20,12 @@ export default function FunFacts () {
     'Australia is wider than the moon. The moon sits at 3400km in diameter, while Australia’s diameter from east to west is almost 4000km.',
     'The Ancient Romans used to drop a piece of toast into their wine for good health - hence why we "raise a toast".'
   ];
-
-  const randomFact = facts[Math.floor(Math.random() * facts.length)];
+  const [randomFact, setRandomFact] = useState(facts[Math.floor(Math.random() * facts.length)]);
+  useEffect(() => {
+    setInterval(() => {
+      setRandomFact(facts[Math.floor(Math.random() * facts.length)]);
+    }, 3000);
+  }, [])
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} data-testid='FunFacts-element'>

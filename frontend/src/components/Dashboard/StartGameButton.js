@@ -72,7 +72,7 @@ export default function StartGameButton (props) {
     } else {
       // Fetch Request to get SessionID
       console.log('Fetching Session ID');
-      const response = await fetch(url + `/admin/quiz?quizId=${quizId}`, {
+      const response = await fetch(url + `/admin/quiz/${quizId}`, {
         method: 'GET',
         headers: { accept: 'application/json', Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
       })
@@ -81,8 +81,8 @@ export default function StartGameButton (props) {
         console.log(`ERROR: ${data.error}`);
       }
       console.log(data);
-      setSessionId(data.quizzes[0].active);
-      setLink(`${url}/join/game/${data.quizzes[0].active}`);
+      setSessionId(data.active);
+      setLink(`http://localhost:3000/join/game/${data.active}`);
       handleShow();
       setOnBefore(true);
     }
@@ -111,9 +111,9 @@ export default function StartGameButton (props) {
     // Switch Routes
     navigate(`/admin/game/${quizId}`, {
       state: {
-        token: token,
-        quizId: quizId,
-        sessionId: sessionId
+        token,
+        quizId,
+        sessionId
       }
     });
   }
@@ -122,12 +122,12 @@ export default function StartGameButton (props) {
     // Switch Routes
     navigate(`/admin/game/${quizId}/results`, {
       state: {
-        token: token,
-        quizId: quizId
+        token,
+        quizId
       }
     });
   }
-
+  console.log(stopGame);
   let width;
   let iconSquare;
   const isSmallScreen = useMediaQuery({ query: '(max-width: 500px)' });
