@@ -1,3 +1,4 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import MultiChoiceToggle from '../components/EditGame/MultiChoiceToggle';
@@ -14,7 +15,7 @@ describe('MultiChoiceToggle', () => {
     userEvent.click(screen.getByRole('checkbox'))
     expect(screen.getByRole('checkbox')).toBeChecked()
   })
-  
+
   it('triggers an onChange event', () => {
     const onChange = jest.fn();
     render(<MultiChoiceToggle onChange={onChange}/>)

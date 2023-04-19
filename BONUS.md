@@ -1,0 +1,1 @@
+For our bonus feature, we have included a small review page for players and admins to rate our application. Also, within the lobby screen for players, we have included fun facts, which change every 3 seconds, to ensure that our lobby screen is engaging for players waiting for the admin to start.
