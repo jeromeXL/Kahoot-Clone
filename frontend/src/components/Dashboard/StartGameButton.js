@@ -8,6 +8,7 @@ import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import StopGameButton from './StopGameButton';
+import { useMediaQuery } from 'react-responsive'
 
 const BACKEND_PORT = data.BACKEND_PORT;
 const url = `http://localhost:${BACKEND_PORT}`;
@@ -87,6 +88,25 @@ export default function StartGameButton (props) {
     }
   };
 
+  const stopGame = async () => {
+    console.log('Stop Game Button Pressed');
+
+    // Fetch request
+    const response = await fetch(url + `/admin/quiz/${quizId}/end`, {
+      method: 'POST',
+      headers: { accept: 'application/json', Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ quizid: quizId })
+    })
+
+    const data = await response.json();
+    if (data.error) {
+      console.log(`ERROR: ${data.error}`);
+    } else {
+      setOnBefore(false);
+      handleRShow();
+    }
+  }
+
   const toAdminGame = async () => {
     // Switch Routes
     navigate(`/admin/game/${quizId}`, {
@@ -108,9 +128,24 @@ export default function StartGameButton (props) {
     });
   }
 
+  let width;
+  let iconSquare;
+  const isSmallScreen = useMediaQuery({ query: '(max-width: 500px)' });
+  const isMediumScreen = useMediaQuery({ query: '(max-width: 800px)' });
+  if (isSmallScreen) {
+    width = '70px';
+    iconSquare = '17';
+  } else if (isMediumScreen) {
+    width = '100px';
+    iconSquare = '20';
+  } else {
+    width = '125px';
+    iconSquare = '25';
+  }
+
   return (
     <>
-    <Modal show={show} onHide={handleClose}>
+    <Modal name='StartGameModal' show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Session ID: {sessionId} </Modal.Title>
       </Modal.Header>
@@ -126,7 +161,7 @@ export default function StartGameButton (props) {
           </CopyToClipboard>
         </Modal.Footer>
     </Modal>
-    <Modal show={RShow} onHide={handleRClose}>
+    <Modal name='StopGameModal' show={RShow} onHide={handleRClose}>
       <Modal.Header closeButton>
         <Modal.Title>Game Stopped!</Modal.Title>
       </Modal.Header>
@@ -134,18 +169,18 @@ export default function StartGameButton (props) {
         Would you like to view results?
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleRClose}>No</Button>
-        <Button variant="primary" onClick={() => toAdminResults()}>Yes</Button>
+        <Button variant="secondary" aria-label='Back to Dashboard Button' onClick={handleRClose}>No</Button>
+        <Button variant="primary" aria-label='View Results Button' name='ToResultsPage' onClick={() => toAdminResults()}>Yes</Button>
         </Modal.Footer>
     </Modal>
     <div>
       { onBefore
         ? <StopGameButton token={token} quizId={quizId} handleRShow={handleRShow} setOnBefore={setOnBefore}></StopGameButton>
         : <Button
-            type="button" style={{ backgroundColor: '#139860', borderColor: '#139860', color: 'white', width: '125px', }}
+            type="button" aria-label='Start Game Button' name='StartGameButton' style={{ backgroundColor: '#139860', borderColor: '#139860', color: 'white', width, }}
             onClick={startGame} className="p-2">
             <svg
-              xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-play-fill" viewBox="0 0 16 16"
+              xmlns="http://www.w3.org/2000/svg" width={iconSquare} height={iconSquare} fill="currentColor" className="bi bi-play-fill" viewBox="0 0 16 16"
               style={{ margin: '-5px' }}
             >
               <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z" />

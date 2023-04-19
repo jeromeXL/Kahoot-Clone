@@ -1,10 +1,10 @@
 import { React, useState, useEffect } from 'react';
 import DashboardHeader from './DashboardHeader';
-// import '@fontsource/inter';
 import GamesContainer from './GamesContainer';
 import GameInDashBoard from './GameInDashboard';
 import { useLocation } from 'react-router-dom';
 import data from '../../config.json';
+import Centre from '../General/Centre';
 
 let token;
 const BACKEND_PORT = data.BACKEND_PORT;
@@ -41,21 +41,14 @@ export default function Dashboard () {
     <>
       <DashboardHeader token={token} update={fetchAllQuizzes}/>
       <GamesContainer>
-        {/* <ul>
-        {quizzes.map((quiz, index) => (
-          <li key={index}>
-            {quiz.name}
-            <br/>
-            {quiz.id}
-            <br/>
-          </li>
-        ))}
-        </ul>
-        <br/> */}
         {quizzes.map((quiz, index) => (
           <GameInDashBoard key={index} token={token} quiz={quiz} update={fetchAllQuizzes}/>
         ))}
       </GamesContainer>
+      {quizzes.length === 0
+        ? <Centre><h4 name='NoQuizzesMsg'>You currently have no quizzes. To create one, click on the + button in the header!</h4></Centre>
+        : <> </>
+      }
     </>
   );
 }

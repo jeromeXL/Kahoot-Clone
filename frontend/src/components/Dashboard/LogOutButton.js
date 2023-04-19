@@ -31,7 +31,7 @@ export default function LogOutButton (props) {
     });
   }
   return (
-    <HeaderButton onClick={logOut}>
+    <HeaderButton name='LogOutButton' onClick={logOut}>
       Log out
     </HeaderButton>
   );

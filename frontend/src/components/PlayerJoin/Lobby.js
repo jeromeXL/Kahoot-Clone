@@ -13,15 +13,20 @@ const url = `http://localhost:${BACKEND_PORT}`;
 
 export default function Lobby () {
   const location = useLocation();
+<<<<<<< HEAD
   const searchParams = new URLSearchParams(location.search);
   const playerId = searchParams.get('playerId');
   const sessionId = searchParams.get('sessionId');
+=======
+  const playerId = location.state.playerId;
+  const sessionId = location.state.sessionId
+>>>>>>> a47c53ede40f88a131055372d8211d4daae1b802
   const navigate = useNavigate();
   
   // Fetch request to check if the game has started.
   const getStatus = async () => {
     console.log('Checking whether game has started...')
-    const response = await fetch(url + `play/${playerId}/status`, {
+    const response = await fetch(url + `/play/${playerId}/status`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     });
@@ -43,7 +48,7 @@ export default function Lobby () {
 
   // Call the fetch request every 1 second
   useEffect(() => {
-    setTimeout(getStatus, 1000);
+    setInterval(getStatus, 1000);
   }, [])
   return (
     <>
