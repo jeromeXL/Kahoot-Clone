@@ -4,7 +4,7 @@ import QuestionHeaderContainer from '../Question/QuestionHeaderContainer';
 import TitleContainer from '../Question/TitleContainer';
 import PointTimeContainer from '../Question/PointTimeContainer';
 import QuestionImage from '../Question/QuestionImage';
-import Ratio from 'react-bootstrap/esm/Ratio';
+import Ratio from 'react-bootstrap/Ratio';
 import ReactPlayer from 'react-player';
 import SubmitButton from '../General/SubmitButton';
 
@@ -22,16 +22,21 @@ export default function QuestionForAdmin (props) {
       <hr/>
       <div className='p-2'>
         {props.image && props.image !== null
-          ? <QuestionImage image={props.image} id={props.id}/>
+          ? <>
+              <QuestionImage image={props.image} id={props.id}/>
+              <hr/>
+            </>
           : <></>
         }
         {props.link && props.link !== null
-          ? <Ratio aspectRatio={'16x9'}>
-            <ReactPlayer url={props.link} controls width='100%' height='100%'/>
-            </Ratio>
+          ? <>
+              <Ratio aspectRatio={'16x9'}>
+                <ReactPlayer url={props.link} controls width='100%' height='100%'/>
+              </Ratio>
+              <hr/>
+            </>
           : <></>
         }
-        <hr/>
       </div>
       <div>
         {props.options.map((option, index) => (

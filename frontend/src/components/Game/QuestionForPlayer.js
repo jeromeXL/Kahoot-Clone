@@ -3,7 +3,7 @@ import QuestionContainer from '../Question/QuestionContainer';
 import QuestionHeaderContainer from '../Question/QuestionHeaderContainer';
 import TitleContainer from '../Question/TitleContainer';
 import QuestionImage from '../Question/QuestionImage';
-import Ratio from 'react-bootstrap/esm/Ratio';
+import Ratio from 'react-bootstrap/Ratio';
 import ReactPlayer from 'react-player/youtube';
 import Form from 'react-bootstrap/Form';
 import PointTimeContainer from '../Question/PointTimeContainer';
@@ -69,13 +69,19 @@ export default function QuestionForPlayer (props) {
       <hr/>
       <div className='p-2'>
         {props.image && props.image !== null
-          ? <QuestionImage image={props.image} id={props.id}/>
+          ? <>
+              <QuestionImage image={props.image} id={props.id}/>
+              <hr/>
+            </>
           : <></>
         }
         {props.link && props.link !== null
-          ? <Ratio aspectRatio={'16x9'}>
-            <ReactPlayer url={props.link} controls playing={true}/>
-            </Ratio>
+          ? <>
+              <Ratio aspectRatio={'16x9'}>
+              <ReactPlayer url={props.link} controls playing={true}/>
+              </Ratio>
+              <hr/>
+            </>
           : <></>
         }
       </div>

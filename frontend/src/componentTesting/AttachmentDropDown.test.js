@@ -24,18 +24,18 @@ describe('AttachmentDropDown', () => {
       // Find the select element
       screen.getByRole('combobox'),
       // Find and select the Link option
-      screen.getByRole('option', {name: 'Youtube Link'}),
+      screen.getByRole('option', {name: /Youtube Link/i}),
     )
-    expect(screen.getByRole('option', {name: 'Youtube Link'}).selected).toBe(true)
+    expect(screen.getByRole('option', {name: /Youtube Link/i}).selected).toBe(true)
 
     userEvent.selectOptions(
       // Find the select element
       screen.getByRole('combobox'),
       // Find and select the Image option
-      screen.getByRole('option', {name: 'Image'}),
+      screen.getByRole('option', {name: /Image/i}),
     )
     // userEvent.selectOptions(screen.getByRole('combobox'), 'img')
-    expect(screen.getByRole('option', {name: 'Image'}).selected).toBe(true)
+    expect(screen.getByRole('option', {name: /Image/i}).selected).toBe(true)
   })
 
   it('changing fires an onChange event', () => {
@@ -45,7 +45,7 @@ describe('AttachmentDropDown', () => {
       // Find the select element
       screen.getByRole('combobox'),
       // Find and select the Link option
-      screen.getByRole('option', {name: 'Youtube Link'}),
+      screen.getByRole('option', {name: /Youtube Link/i}),
     )
     expect(onChange).toHaveBeenCalledTimes(1);
   })
@@ -57,10 +57,10 @@ describe('AttachmentDropDown', () => {
       // Find the select element
       screen.getByRole('combobox'),
       // Find and try select the Link option
-      screen.getByRole('option', {name: 'Youtube Link'}),
+      screen.getByRole('option', {name: /Youtube Link/i}),
     )
-    expect(screen.getByRole('option', {name: 'No attachment'}).selected).toBe(true)
-    expect(screen.getByRole('option', {name: 'Youtube Link'}).selected).toBe(false)
+    expect(screen.getByRole('option', {name: /No attachment/i}).selected).toBe(true)
+    expect(screen.getByRole('option', {name: /Youtube Link/i}).selected).toBe(false)
     expect(onChange).toHaveBeenCalledTimes(0);
   })
 })

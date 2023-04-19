@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from 'react-bootstrap/esm/Button';
+import Button from 'react-bootstrap/Button';
 import data from '../../config.json';
 
 const BACKEND_PORT = data.BACKEND_PORT;

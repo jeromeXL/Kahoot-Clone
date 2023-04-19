@@ -34,3 +34,5 @@ export default function FunFacts () {
     </div>
   );
 }
+
+export { facts }

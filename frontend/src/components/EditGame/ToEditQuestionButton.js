@@ -1,5 +1,5 @@
 import { React, useContext } from 'react';
-import Button from 'react-bootstrap/esm/Button';
+import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 import { QuestionsContext } from './EditGame.js'
 
