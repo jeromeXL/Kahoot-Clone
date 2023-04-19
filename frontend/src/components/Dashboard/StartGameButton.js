@@ -1,4 +1,5 @@
-import { React, useEffect, useState } from 'react';
+import { React, useState } from 'react';
+// import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal'
@@ -31,32 +32,28 @@ export default function StartGameButton (props) {
   const handleRClose = () => setRShow(false);
   const handleRShow = () => setRShow(true);
 
-  const [onBefore, setOnBefore] = useState(() => {
-    const storedOnBefore = localStorage.getItem(`onBefore_${quizId}`);
-    return storedOnBefore !== null ? JSON.parse(storedOnBefore) : false;
-  });
+  const [onBefore, setOnBefore] = useState(false);
 
   const [sessionId, setSessionId] = useState(null);
   const [link, setLink] = useState('');
 
+  /* Not Working
   useEffect(() => {
     const checkOnBefore = async () => {
-      const response = await fetch(url + `admin/quiz/?quizId=${quizId}`, {
+      const response = await fetch(url + `/admin/quiz/?quizId=${quizId}`, {
         method: 'GET',
         headers: { accept: 'application/json', Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
       });
       const data = await response.json();
-      if (data.active === null && data.oldSessions.length === 0) {
-        setOnBefore(false);
-        localStorage.setItem(`onBefore_${quizId}`, false);
-      } else if (data.active !== null) {
+      if (data.active !== null || data.oldSessions.length !== 0) {
         setOnBefore(true);
-        localStorage.setItem(`onBefore_${quizId}`, true);
+      } else {
+        setOnBefore(false);
       }
     };
-
     checkOnBefore();
   }, []);
+  */
 
   const startGame = async () => {
     console.log('Start Game Button Pressed');
@@ -93,16 +90,21 @@ export default function StartGameButton (props) {
   const toAdminGame = async () => {
     // Switch Routes
     navigate(`/admin/game/${quizId}`, {
-      token: token,
-      quizId: quizId
+      state: {
+        token: token,
+        quizId: quizId,
+        sessionId: sessionId
+      }
     });
   }
 
   const toAdminResults = async () => {
     // Switch Routes
     navigate(`/admin/game/${quizId}/results`, {
-      token: token,
-      quizId: quizId
+      state: {
+        token: token,
+        quizId: quizId
+      }
     });
   }
 

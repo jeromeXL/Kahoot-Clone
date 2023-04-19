@@ -13,9 +13,11 @@ const url = `http://localhost:${BACKEND_PORT}`;
 
 export default function Lobby () {
   const location = useLocation();
-  const playerId = location.playerId;
-  const sessionId = location.sessionId
+  const searchParams = new URLSearchParams(location.search);
+  const playerId = searchParams.get('playerId');
+  const sessionId = searchParams.get('sessionId');
   const navigate = useNavigate();
+  
   // Fetch request to check if the game has started.
   const getStatus = async () => {
     console.log('Checking whether game has started...')
