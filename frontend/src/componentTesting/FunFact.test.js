@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, within } from '@testing-library/react';
-import  FunFacts, { facts } from '../components/FunFacts/FunFacts';
+import FunFacts, { facts } from '../components/FunFacts/FunFacts';
 
 describe('FunFacts', () => {
   it('can render', () => {
