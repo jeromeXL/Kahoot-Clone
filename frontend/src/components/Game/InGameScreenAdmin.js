@@ -91,12 +91,15 @@ export default function InGameScreenAdmin (props) {
     const data = await response.json();
     if (data.error) {
       console.log(`ERROR: ${data.error}`);
+    } else {
+      // Switch Routes
+      navigate(`/admin/game/${quizId}/results`, {
+        state: {
+          token,
+          quizId
+        }
+      });
     }
-    // Switch Routes
-    navigate(`/admin/game/${quizId}/results`, {
-      token,
-      quizId
-    });
   }
 
   return (

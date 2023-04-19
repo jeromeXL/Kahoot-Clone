@@ -14,6 +14,7 @@ const url = `http://localhost:${BACKEND_PORT}`;
 export default function Lobby () {
   const location = useLocation();
   const playerId = location.state.playerId;
+  console.log('PLayerID is : ', playerId);
   const sessionId = location.state.sessionId
   const navigate = useNavigate();
 
@@ -28,8 +29,11 @@ export default function Lobby () {
     if (data.started && data.started === true) {
       // Take me to starting screen
       console.log('Game is starting!')
+      clearInterval(refresh);
       navigate(`/join/play/${sessionId}`, {
-        playerId,
+        state: {
+          playerId
+        },
       });
     } else {
       if (data.error) {
@@ -39,10 +43,10 @@ export default function Lobby () {
       console.log('Game has not started yet!')
     }
   };
-
+  let refresh;
   // Call the fetch request every 1 second
   useEffect(() => {
-    setInterval(getStatus, 1000);
+    refresh = setInterval(getStatus, 1000);
   }, [])
   return (
     <>

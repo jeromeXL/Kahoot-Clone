@@ -7,13 +7,15 @@ const BACKEND_PORT = data.BACKEND_PORT;
 const url = `http://localhost:${BACKEND_PORT}`;
 
 export default function InGameScreenPlayer () {
-  const location = useLocation;
-  const playerId = location.playerId;
+  const location = useLocation();
+  const playerId = location.state.playerId;
+  console.log(playerId);
   const [question, setQuestion] = useState({});
 
   const getQuestionData = async () => {
     console.log('Getting question data...')
-    const response = await fetch(url + `play/${playerId}/question`, {
+    console.log('Player Id = ', playerId);
+    const response = await fetch(url + `/play/${playerId}/question`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     });
@@ -24,12 +26,14 @@ export default function InGameScreenPlayer () {
       alert(`ERROR: ${data.error}`);
     } else {
       setQuestion(data.question);
+      console.log('data is :', data);
+      console.log('question: ', data.question);
     }
   }
 
   useEffect(() => {
-    // Get question data every 1 second. If the data changes, it should update the page with the new question
-    setTimeout(getQuestionData, 1000);
+    // Get question data every 3 second. If the data changes, it should update the page with the new question
+    setInterval(getQuestionData, 3000);
   }, [])
 
   return (

@@ -1,23 +1,24 @@
 import React from 'react'
-import data from '../../config.json';
 import Centre from '../General/Centre';
 import Title from '../General/Title';
 import Subtitle from '../General/Subtitle';
 import FormContainer from '../General/FormContainer';
 import SubmitButton from '../General/SubmitButton';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import data from '../../config.json';
 const BACKEND_PORT = data.BACKEND_PORT;
 const url = `http://localhost:${BACKEND_PORT}`;
 
 export default function ResultsScreenAdmin (props) {
   const navigate = useNavigate();
-  const token = props.token;
-  const quizId = props.quizId;
-  console.log(token, quizId, url);
+  const location = useLocation();
+  console.log(url);
+  console.log(location.state.token);
+  console.log(location.state.quizId);
   const backToDashboard = () => {
     navigate('/dashboard', {
       state: {
-        token,
+        token: location.state.token
       }
     });
   }

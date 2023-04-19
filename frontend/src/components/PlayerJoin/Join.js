@@ -47,16 +47,16 @@ export default function Join () {
       body: JSON.stringify({ name })
     })
 
-    const data = await response.json();
-    if (data.error) {
-      console.log(`ERROR: ${data.error}`);
+    const respData = await response.json();
+    if (respData.error) {
+      console.log(`ERROR: ${respData.error}`);
       setJoinError(true);
       setErrorMessage('Invalid Session ID');
     } else {
-      console.log('Joining data ', data);
+      console.log('Joining data ', respData);
       navigate(`/join/lobby/${sessionId}`, {
         state: {
-          playerId: data.playerId,
+          playerId: respData.playerId,
           sessionId,
         }
       });

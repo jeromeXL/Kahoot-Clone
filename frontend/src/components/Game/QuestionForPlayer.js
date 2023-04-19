@@ -21,9 +21,11 @@ export default function QuestionForPlayer (props) {
     setAnswers(tmpAnswers);
     // Send the PUT requests
     const answerIds = [];
-    for (let i = 0; i < tmpAnswers.length; i++) {
-      if (tmpAnswers[i] === true) {
-        answerIds.push(i);
+    if (tmpAnswers && tmpAnswers.length !== undefined) {
+      for (let i = 0; i < tmpAnswers.length; i++) {
+        if (tmpAnswers[i] === true) {
+          answerIds.push(i);
+        }
       }
     }
     const response = await fetch(url + `/play/${props.playerId}/answer`, {
@@ -41,14 +43,18 @@ export default function QuestionForPlayer (props) {
 
   // All answers are initially false, as they are not selected.
   const populateAnswers = () => {
-    for (let i = 0; i < props.options.length; i++) {
-      setAnswers(oldArray => [...oldArray, false]);
+    if (props.options && props.options.length !== undefined) {
+      for (let i = 0; i < props.options.length; i++) {
+        setAnswers(oldArray => [...oldArray, false]);
+      }
     }
   }
 
   useEffect(() => {
     populateAnswers();
   }, []);
+
+  console.log('options is : ', props.options);
 
   return (
     <QuestionContainer>
